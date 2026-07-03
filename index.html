@@ -19,7 +19,7 @@
     <meta property="og:site_name" content="AL Noor Solar Energy">
     <meta property="og:title" content="AL Noor Solar Energy | Best Solar Company in Multan">
     <meta property="og:description" content="Switch to clean energy with AL Noor Solar Energy Multan. Wholesale prices on top solar panels, inverters, and lithium batteries.">
-    <meta property="og:image" content="favicon.png">
+    <meta property="og:image" content="https://al-noorsolarenergy.com/favicon.png">
     <meta property="og:url" content="https://al-noorsolarenergy.com/">
     <meta property="og:type" content="business.business">
 
@@ -30,8 +30,8 @@
       "@type": "LocalBusiness",
       "name": "AL Noor Solar Energy",
       "url": "https://al-noorsolarenergy.com/",
-      "logo": "favicon.png",
-      "image": "favicon.png",
+      "logo": "https://al-noorsolarenergy.com/favicon.png",
+      "image": "https://al-noorsolarenergy.com/favicon.png",
       "description": "The biggest solar company in South Punjab, Multan. Providing wholesale solar panels, inverters, and complete installation services.",
       "telephone": "+923006771013",
       "priceRange": "$$",
@@ -60,11 +60,30 @@
     }
     </script>
 
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AL Noor Solar Energy | Best Solar Company in Multan">
+    <meta name="twitter:description" content="Switch to clean energy with AL Noor Solar Energy Multan. Wholesale prices on top solar panels, inverters, and lithium batteries.">
+    <meta name="twitter:image" content="https://al-noorsolarenergy.com/favicon.png">
+
+    <!-- Performance: Preconnect & DNS Prefetch -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://firestore.googleapis.com">
+
     <!-- Font Awesome for icons (CDN) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
-    
+    <!-- Main Stylesheet -->
     <link rel="stylesheet" href="assets/css/style.css">
+
+    <!-- Theme Color for Mobile Browsers -->
+    <meta name="theme-color" content="#071E4A">
+    <meta name="msapplication-TileColor" content="#071E4A">
+</head>
+<body style="overflow-x: hidden;">
 
 <div id="app-wrapper">
 
@@ -201,28 +220,28 @@
         <!-- Left 2x2 grid -->
         <div class="cat-col-left">
           <a href="#solar-inverters" class="cat-item nav-link" aria-label="Shop Solar Inverters">
-            <img src="assets/images/category-inverters.webp" alt="Solar Inverters Category">
+            <img src="assets/images/category-inverters.webp" alt="Solar Inverters Category" loading="lazy" decoding="async">
             <div class="cat-overlay">
               <h3>Solar Inverters</h3>
               <span class="cat-btn">Shop Now</span>
             </div>
           </a>
           <a href="#lithium-batteries" class="cat-item nav-link" aria-label="Shop Lithium Batteries">
-            <img src="assets/images/category-batteries.webp" alt="Lithium Batteries Category">
+            <img src="assets/images/category-batteries.webp" alt="Lithium Batteries Category" loading="lazy" decoding="async">
             <div class="cat-overlay">
               <h3>Lithium Batteries</h3>
               <span class="cat-btn">Shop Now</span>
             </div>
           </a>
           <a href="#vfd-inverters" class="cat-item nav-link" aria-label="Shop VFD Inverters">
-            <img src="assets/images/category-vfd.webp" alt="VFD Inverters Category">
+            <img src="assets/images/category-vfd.webp" alt="VFD Inverters Category" loading="lazy" decoding="async">
             <div class="cat-overlay">
               <h3>VFD Inverters</h3>
               <span class="cat-btn">Shop Now</span>
             </div>
           </a>
           <a href="#other-accessories" class="cat-item nav-link" aria-label="Shop Other Accessories">
-            <img src="assets/images/category-accessories.webp" alt="Other Accessories Category">
+            <img src="assets/images/category-accessories.webp" alt="Other Accessories Category" loading="lazy" decoding="async">
             <div class="cat-overlay">
               <h3>Other Accessories</h3>
               <span class="cat-btn">Shop Now</span>
@@ -695,50 +714,159 @@
 <section class="page container" id="page-services"></section>
 <section class="page container" id="page-about"></section>
     <section class="page container" id="page-products"></section>
-<section class="page container" id="page-product"> <!-- ID change ki hai -->
-      <div class="breadcrumb">
-        <span onclick="history.back()" style="cursor:pointer; font-weight: bold; color: var(--primary-blue);">← Back</span>
-        <i class="fas fa-chevron-right" style="margin: 0 10px; font-size: 0.8em; color: var(--secondary-text-color);"></i>
-        <span id="detailBreadcrumb" style="color: var(--secondary-text-color);">Product</span>
-      </div>
-      <div class="pd-wrap" style="animation: fadeInUp 0.6s ease;">
-        <div class="pd-img-main" id="pdImg"></div>
-        <div id="pdSaleTag"></div>
-        <div class="pd-vendor" id="pdVendor"></div>
-        <div class="pd-name"   id="pdName"></div>
-        <div class="pd-prices">
-          <span class="pd-price" id="pdPrice"></span>
-          <span class="pd-old"   id="pdOld"></span>
+<section class="page container" id="page-product">
+        <div class="breadcrumb" style="margin-bottom: 20px; animation: fadeIn 0.4s ease;">
+            <span onclick="history.back()" style="cursor:pointer; font-weight: bold; color: var(--primary); display: inline-flex; align-items: center; gap: 5px;">
+                <i class="fas fa-arrow-left"></i> Back
+            </span>
+            <i class="fas fa-chevron-right" style="margin: 0 10px; font-size: 0.8em; color: var(--text-muted);"></i>
+            <span id="detailBreadcrumbCat" style="color: var(--text-muted); cursor: pointer;" onclick="navigate(document.getElementById('detailBreadcrumbCat').dataset.hash || 'products')">Category</span>
+            <i class="fas fa-chevron-right" style="margin: 0 10px; font-size: 0.8em; color: var(--text-muted);"></i>
+            <span id="detailBreadcrumb" style="color: var(--bg-dark); font-weight: 500;">Product</span>
         </div>
-        <div class="pd-desc" id="pdDesc">Premium quality product with official warranty.</div>
-        <div class="pd-qty-row">
-          <label>Quantity:</label>
-          <div class="pd-qty-ctrl">
-            <button class="pd-qty-btn" aria-label="Decrease Quantity" onclick="changeDetailQty(-1)">−</button>
-            <span class="pd-qty-n" id="detailQty">1</span>
-            <button class="pd-qty-btn" aria-label="Increase Quantity" onclick="changeDetailQty(1)">+</button>
-          </div>
-        </div>
-       <a id="pdDatasheetBtn" href="#" target="_blank" class="pd-datasheet-btn" style="display: none;">
-            <i class="fas fa-file-pdf" style="color: red;"></i> View / Download Datasheet
-        </a>
-        <button class="pd-add-btn" onclick="addDetailToCart()"><i class="fas fa-cart-plus"></i> Add to Cart</button>
-        <div class="pd-share-row" style="margin-top:12px">
-          <i class="fas fa-share-alt" style="color:var(--primary-blue)"></i>
-          <span>Share: </span><a href="#" onclick="shareProduct()">Copy Link</a>
-        </div>
-        <p style="font-size:10.5px;color:var(--secondary-text-color);margin-top:10px">
-          ☑ I agree with <a href="#terms-of-service" class="nav-link" style="color:var(--primary-blue)">Terms & Conditions</a>
-        </p>
         
-        <!-- YAHAN MISSING DIV ADD KIYA HAI -->
-        <div id="pdLongDesc" class="pd-long-desc"></div>
+        <div class="pdp-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 50px; animation: fadeInUp 0.6s ease;">
+            <!-- Left: Gallery -->
+            <div class="pdp-gallery-col">
+                <div class="pdp-main-img-wrap" style="background: var(--light-gray); border-radius: var(--radius-md); overflow: hidden; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; position: relative;">
+                    <img id="pdImg" src="" alt="Product Image" loading="lazy" style="width: 100%; height: 100%; object-fit: contain; transition: transform 0.3s ease; cursor: zoom-in;" onclick="this.style.transform = this.style.transform === 'scale(1.5)' ? 'scale(1)' : 'scale(1.5)'">
+                    <div id="pdSaleTag" class="pdp-sale-badge" style="display:none; position: absolute; top: 15px; left: 15px; background: var(--danger); color: white; padding: 6px 14px; border-radius: 20px; font-weight: 700; font-size: 0.85rem;">Sale</div>
+                </div>
+            </div>
+            
+            <!-- Right: Info -->
+            <div class="pdp-info-col">
+                <div class="pd-vendor" id="pdVendor" style="color: var(--primary); font-weight: 600; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; margin-bottom: 8px;"></div>
+                <h1 class="pd-name" id="pdName" style="font-size: clamp(1.5rem, 3vw, 2rem); color: var(--bg-dark); font-weight: 700; margin-bottom: 15px; line-height: 1.2;"></h1>
+                
+                <div class="pdp-rating-row" style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px; cursor: pointer;" onclick="document.getElementById('tab-reviews').click(); document.getElementById('pdp-tabs').scrollIntoView({behavior: 'smooth'})">
+                    <div class="stars" id="pdAvgStars" style="color: #ffc107; font-size: 1.1rem;">
+                        <i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+                    </div>
+                    <span id="pdReviewCount" style="color: var(--text-muted); font-size: 0.9rem;">(0 Reviews)</span>
+                </div>
+                
+                <div class="pd-prices" style="display: flex; align-items: baseline; gap: 15px; margin-bottom: 25px; padding-bottom: 25px; border-bottom: 1px solid var(--border-color);">
+                    <span class="pd-price" id="pdPrice" style="font-size: clamp(1.8rem, 3.5vw, 2.2rem); font-weight: 800; color: var(--primary);"></span>
+                    <span class="pd-old" id="pdOld" style="font-size: 1.3rem; color: var(--text-muted); text-decoration: line-through;"></span>
+                </div>
+                
+                <div class="pdp-availability" style="margin-bottom: 20px; font-weight: 600;">
+                    Availability: <span id="pdAvailability" style="color: #2e7d32;"><i class="fas fa-check-circle"></i> In Stock</span>
+                </div>
+                
+                <div class="pd-desc" id="pdDesc" style="font-size: 1.05rem; color: var(--text-dark); line-height: 1.7; margin-bottom: 30px;"></div>
+                
+                <div class="pdp-actions" style="background: var(--light-gray); padding: 25px; border-radius: var(--radius-md); margin-bottom: 30px;">
+                    <div class="pd-qty-row" style="margin-bottom: 20px; display: flex; align-items: center; gap: 15px;">
+                        <label style="font-weight: 600; color: var(--bg-dark);">Quantity:</label>
+                        <div class="pd-qty-ctrl" style="display: flex; background: white; border: 1px solid var(--border-color); border-radius: var(--radius-sm); overflow: hidden; width: fit-content;">
+                            <button class="pd-qty-btn" aria-label="Decrease Quantity" onclick="changeDetailQty(-1)" style="width: 44px; height: 44px; border: none; background: none; font-size: 1.2rem; cursor: pointer; color: var(--bg-dark);">−</button>
+                            <span class="pd-qty-n" id="detailQty" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; font-weight: 600; border-left: 1px solid var(--border-color); border-right: 1px solid var(--border-color);">1</span>
+                            <button class="pd-qty-btn" aria-label="Increase Quantity" onclick="changeDetailQty(1)" style="width: 44px; height: 44px; border: none; background: none; font-size: 1.2rem; cursor: pointer; color: var(--bg-dark);">+</button>
+                        </div>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                        <button id="pdAddBtn" class="pd-add-btn" onclick="addDetailToCart()" style="padding: 16px; font-size: 1.05rem; font-weight: 600; border-radius: var(--radius-sm); cursor: pointer; background: white; color: var(--primary); border: 2px solid var(--primary); transition: var(--transition); display: flex; align-items: center; justify-content: center; gap: 10px;">
+                            <i class="fas fa-cart-plus"></i> Add to Cart
+                        </button>
+                        <button id="pdBuyBtn" class="pd-buy-btn" onclick="buyNow()" style="padding: 16px; font-size: 1.05rem; font-weight: 600; border-radius: var(--radius-sm); cursor: pointer; background: var(--primary); color: white; border: 2px solid var(--primary); transition: var(--transition); display: flex; align-items: center; justify-content: center; gap: 10px;">
+                            <i class="fas fa-bolt"></i> Buy Now
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="pdp-meta-links" style="display: flex; flex-direction: column; gap: 15px;">
+                    <a id="pdDatasheetBtn" href="#" target="_blank" class="pd-datasheet-btn" style="display: none; align-items: center; gap: 10px; color: var(--text-dark); text-decoration: none; font-weight: 500; padding: 12px 0;">
+                        <i class="fas fa-file-pdf" style="color: #e53935; font-size: 1.2rem;"></i> Download Technical Datasheet
+                    </a>
+                    
+                    <div class="pd-share-row" style="display: flex; align-items: center; gap: 10px; color: var(--text-dark); font-weight: 500;">
+                        <i class="fas fa-share-alt" style="color:var(--primary)"></i>
+                        <span>Share: </span>
+                        <div style="display: flex; gap: 15px; font-size: 1.2rem;">
+                            <a href="#" onclick="shareProduct('wa'); return false;" style="color: #25D366;" aria-label="Share on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                            <a href="#" onclick="shareProduct('fb'); return false;" style="color: #1877F2;" aria-label="Share on Facebook"><i class="fab fa-facebook"></i></a>
+                            <a href="#" onclick="shareProduct('copy'); return false;" style="color: var(--text-muted);" title="Copy Link" aria-label="Copy Link"><i class="fas fa-link"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--border-color); display: flex; align-items: center; gap: 15px;">
+                    <i class="fas fa-shield-alt" style="font-size: 2rem; color: var(--primary);"></i>
+                    <div>
+                        <div style="font-weight: 600; color: var(--bg-dark);">Official Warranty</div>
+                        <div style="font-size: 0.9rem; color: var(--text-muted);">100% Genuine Product Guaranteed</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Tabs Section -->
+        <div id="pdp-tabs" class="pdp-tabs-container" style="margin-top: 60px;">
+            <div class="pdp-tabs-header" style="display: flex; border-bottom: 2px solid var(--border-color); gap: 30px; margin-bottom: 30px; overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch;">
+                <button class="pdp-tab-btn active" id="tab-desc" onclick="switchPdpTab('desc')" style="background: none; border: none; padding: 15px 5px; font-size: 1.1rem; font-weight: 600; color: var(--primary); cursor: pointer; border-bottom: 3px solid var(--primary); margin-bottom: -2px; white-space: nowrap;">Description</button>
+                <button class="pdp-tab-btn" id="tab-reviews" onclick="switchPdpTab('reviews')" style="background: none; border: none; padding: 15px 5px; font-size: 1.1rem; font-weight: 600; color: var(--text-muted); cursor: pointer; margin-bottom: -2px; white-space: nowrap;">Reviews (<span id="tabReviewCount">0</span>)</button>
+            </div>
+            
+            <div class="pdp-tab-content active" id="content-desc">
+                <div id="pdLongDesc" class="pd-long-desc" style="font-size: 1.05rem; line-height: 1.8; color: var(--text-dark);"></div>
+            </div>
+            
+            <div class="pdp-tab-content" id="content-reviews" style="display: none;">
+                <div class="pdp-reviews-grid" style="display: grid; grid-template-columns: 1fr 2fr; gap: 40px;">
+                    <!-- Review Form -->
+                    <div style="background: var(--light-gray); padding: 30px; border-radius: var(--radius-md); height: fit-content;">
+                        <h3 style="margin-bottom: 15px; color: var(--bg-dark);">Write a Review</h3>
+                        <p style="color: var(--text-muted); margin-bottom: 20px; font-size: 0.9rem;">Share your experience with this product.</p>
+                        
+                        <form id="reviewForm" onsubmit="submitReview(event)">
+                            <div style="margin-bottom: 15px;">
+                                <label style="display: block; margin-bottom: 5px; font-weight: 600;">Your Rating</label>
+                                <div id="reviewStarSelect" style="color: #e0e0e0; font-size: 1.8rem; cursor: pointer;">
+                                    <i class="fas fa-star" data-val="1" onclick="setReviewRating(1)"></i>
+                                    <i class="fas fa-star" data-val="2" onclick="setReviewRating(2)"></i>
+                                    <i class="fas fa-star" data-val="3" onclick="setReviewRating(3)"></i>
+                                    <i class="fas fa-star" data-val="4" onclick="setReviewRating(4)"></i>
+                                    <i class="fas fa-star" data-val="5" onclick="setReviewRating(5)"></i>
+                                </div>
+                                <input type="hidden" id="reviewRatingVal" value="0">
+                            </div>
+                            <div style="margin-bottom: 15px;">
+                                <label style="display: block; margin-bottom: 5px; font-weight: 600;">Name</label>
+                                <input type="text" id="reviewName" required placeholder="Your name" style="width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: var(--radius-sm);">
+                            </div>
+                            <div style="margin-bottom: 15px;">
+                                <label style="display: block; margin-bottom: 5px; font-weight: 600;">Review</label>
+                                <textarea id="reviewText" required rows="4" placeholder="Write your review..." style="width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: var(--radius-sm); resize: vertical;"></textarea>
+                            </div>
+                            <button type="submit" style="width: 100%; padding: 14px; background: var(--primary); color: white; border: none; border-radius: var(--radius-sm); font-weight: 600; font-size: 1rem; cursor: pointer; transition: var(--transition);">Submit Review</button>
+                        </form>
+                    </div>
+                    
+                    <!-- Review List -->
+                    <div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; flex-wrap: wrap; gap: 10px;">
+                            <h3 style="color: var(--bg-dark);">Customer Reviews</h3>
+                            <select id="reviewSort" onchange="loadReviews()" style="padding: 8px 15px; border: 1px solid var(--border-color); border-radius: var(--radius-sm); outline: none;">
+                                <option value="newest">Newest First</option>
+                                <option value="highest">Highest Rating</option>
+                                <option value="lowest">Lowest Rating</option>
+                            </select>
+                        </div>
+                        <div id="reviewsList">
+                            <p style="color: var(--text-muted); text-align: center; padding: 40px 0;">No reviews yet. Be the first to review this product!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-      </div>
-      <div class="also-like-sec">
-        <div class="als-title">You May Also Like</div>
-        <div class="prod-scroll" id="alsoLikeScroll"></div>
-      </div>
+        <div class="also-like-sec" style="margin-top: 80px;">
+            <div class="als-title" style="font-size: clamp(1.5rem, 3vw, 2rem); color: var(--bg-dark); margin-bottom: 30px; text-align: center;">Related Products</div>
+            <div class="prod-scroll" id="alsoLikeScroll" style="padding-bottom: 20px;"></div>
+        </div>
     </section>
   </main>
 </div>
@@ -895,28 +1023,20 @@ function ccNext(id){ if(_cc[id]){ _cc[id].go(_cc[id].cur()+1); _cc[id].run(); } 
   document.addEventListener('click', handleNavClick, true);
 })();
 /* ══════════════════════════════════════════════
-   EXIT POPUP — Sirf browser Back button pe
-   "Stay"  = popup band, user page pe rehta hai
-   "Exit"  = actually page se nikalta hai
+   EXIT INTENT POPUP — Mouse leave (Desktop)
 ══════════════════════════════════════════════ */
+function showExitPopup() {
+  var popup = document.getElementById('exitPopup');
+  if (popup && !sessionStorage.getItem('exitIntentShown')) {
+      popup.classList.add('show');
+      sessionStorage.setItem('exitIntentShown', 'true');
+  }
+}
 (function(){
-  if (!window.history || !window.history.pushState) return;
-
-  // Push sentinel entry
-  history.pushState({_alNoor:true}, '', window.location.href);
-
-  window.addEventListener('popstate', function(e) {
-    // Ignore if it's our own SPA navigation popping
-    if (e.state && e.state._alNoor === false) return;
-
-    var popup = document.getElementById('exitPopup');
-    if (!popup) return;
-
-    // Show popup
-    popup.classList.add('show');
-
-    // Re-push so user stays on current page while deciding
-    history.pushState({_alNoor:true}, '', window.location.href);
+  document.addEventListener("mouseleave", function(event){
+    if(event.clientY <= 0 || event.clientX <= 0 || (event.clientX >= window.innerWidth || event.clientY >= window.innerHeight)) {
+        showExitPopup();
+    }
   });
 })();
 function closeExitPopup() {
@@ -1121,6 +1241,12 @@ function doExit() {
 
             <!-- 404 Not Found Page -->
              <section class="page container" id="page-account"></section>
+            <section class="page container" id="page-faq" style="animation: fadeIn 0.6s ease;"></section>
+            <section class="page container" id="page-shipping-policy" style="animation: fadeIn 0.6s ease;"></section>
+            <section class="page container" id="page-blog" style="animation: fadeIn 0.6s ease;"></section>
+            <section class="page container" id="page-blog-single" style="animation: fadeIn 0.6s ease;"></section>
+            <section class="page container" id="page-brands" style="animation: fadeIn 0.6s ease;"></section>
+            <section class="page container" id="page-thank-you" style="animation: fadeIn 0.6s ease;"></section>
             <section class="page container" id="page-not-found">
                 <div style="text-align: center; padding: 100px;">
                     <h1>404 - Page Not Found</h1>
@@ -1150,11 +1276,15 @@ function doExit() {
                     <h4>Important Links</h4>
                     <a href="#home" class="nav-link">Homepage</a>
                     <a href="#products" class="nav-link">Shop</a>
+                    <a href="#brands" class="nav-link">Brands</a>
+                    <a href="#blog" class="nav-link">Blog</a>
                     <a href="#about-us" class="nav-link">About Us</a>
                     <a href="#contact-us" class="nav-link">Contact Information</a>
                 </div>
                 <div class="footer-column further-info">
                     <h4>Further Info.</h4>
+                    <a href="#faq" class="nav-link">FAQ</a>
+                    <a href="#shipping-policy" class="nav-link">Shipping Policy</a>
                     <a href="#privacy-policy" class="nav-link">Privacy Policy</a>
                     <a href="#refund-policy" class="nav-link">Refund and Replacement Policy</a>
                     <a href="#terms-of-service" class="nav-link">Terms of Service</a>
@@ -1338,6 +1468,12 @@ function doExit() {
 
         // Render functions for different pages
         const pageRenderers = {
+            'faq': renderFAQPage,
+            'shipping-policy': renderShippingPolicy,
+            'blog': renderBlogPage,
+            'blog-single': renderBlogSingle,
+            'brands': renderBrandsPage,
+            'thank-you': renderThankYouPage,
             'home': renderHome,
             'products': renderAllProducts,
             'services': renderServicesPage,
@@ -2303,7 +2439,7 @@ function doExit() {
                             ${promoHtml}
                             ${stockHtml}
                         </div>
-                        <img src="${product.image}" alt="${product.name} Image" onerror="this.onerror=null;this.src='https://via.placeholder.com/220x220?text=Solar+Product';">
+                        <img src="${product.image}" alt="${product.name} Image" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='https://via.placeholder.com/220x220?text=Solar+Product';">
                         <div class="card-actions">
                             <button class="action-btn" aria-label="Add to Wishlist" onclick="event.preventDefault(); showToast('Added to wishlist!')"><i class="far fa-heart"></i></button>
                             <button class="action-btn" aria-label="Quick View" onclick="event.preventDefault(); navigate('product?id=${product.id}')"><i class="far fa-eye"></i></button>
@@ -2822,81 +2958,266 @@ function doExit() {
                 return;
             }
 
-              const pageDetail = document.getElementById('page-product');
-            pageDetail.classList.add('active'); // Show product detail page
+            const pageDetail = document.getElementById('page-product');
+            pageDetail.classList.add('active');
 
             // Update breadcrumbs
+            document.getElementById('detailBreadcrumbCat').textContent = product.category;
+            document.getElementById('detailBreadcrumbCat').dataset.hash = product.category.toLowerCase().replace(/\s+/g, '-');
             document.getElementById('detailBreadcrumb').textContent = product.name;
 
-            // Populate main image, vendor, name, prices, description
-            document.getElementById('pdImg').style.backgroundImage = `url('${product.image}')`;
-            document.getElementById('pdVendor').textContent = `Vendor: ${product.vendor}`;
+            // Populate Info
+            document.getElementById('pdImg').src = product.image;
+            document.getElementById('pdVendor').textContent = product.vendor;
             document.getElementById('pdName').textContent = product.name;
             document.getElementById('pdPrice').textContent = formatPrice(product.price);
+            
             if (product.oldPrice) {
                 document.getElementById('pdOld').textContent = formatPrice(product.oldPrice);
-                document.getElementById('pdSaleTag').textContent = 'Sale';
-                document.getElementById('pdSaleTag').style.display = 'inline-block';
+                document.getElementById('pdSaleTag').style.display = 'block';
             } else {
                 document.getElementById('pdOld').textContent = '';
                 document.getElementById('pdSaleTag').style.display = 'none';
             }
-            document.getElementById('pdDesc').textContent = product.description;
+            
             document.getElementById('pdDesc').textContent = product.description;
 
-            // --- NEW: Datasheet Button Logic (HAMESHA SHOW HOGA) ---
+            // Datasheet
             const datasheetBtn = document.getElementById('pdDatasheetBtn');
-            datasheetBtn.style.display = 'flex'; // Button HAMESHA show karega
-            
+            datasheetBtn.style.display = 'flex';
             if (product.datasheetUrl && product.datasheetUrl.trim() !== '') {
                 datasheetBtn.href = product.datasheetUrl;
-                datasheetBtn.onclick = null; // Agar link hai to open ho jayega
+                datasheetBtn.onclick = null;
             } else {
                 datasheetBtn.href = "#";
                 datasheetBtn.onclick = function(e) {
                     e.preventDefault();
-                    alert("Datasheet PDF link is not added for this product in Admin Panel yet.");
+                    alert("Datasheet PDF is currently unavailable for this product.");
                 };
             }
 
-            // --- NEW: Long Description / Table Logic ---
+            // Availability
+            const availBadge = document.getElementById('pdAvailability');
+            const pdAddBtn = document.getElementById('pdAddBtn');
+            const pdBuyBtn = document.getElementById('pdBuyBtn');
+            
+            if (product.availability === 'Out of stock') {
+                availBadge.innerHTML = '<i class="fas fa-times-circle"></i> Out of Stock';
+                availBadge.style.color = '#e53935';
+                
+                pdAddBtn.innerHTML = '<i class="fas fa-bell"></i> Notify Me';
+                pdAddBtn.style.opacity = '0.5';
+                pdAddBtn.onclick = () => alert("You will be notified when this item is back in stock.");
+                
+                pdBuyBtn.style.display = 'none';
+            } else {
+                availBadge.innerHTML = '<i class="fas fa-check-circle"></i> In Stock';
+                availBadge.style.color = '#2e7d32';
+                
+                pdAddBtn.innerHTML = '<i class="fas fa-cart-plus"></i> Add to Cart';
+                pdAddBtn.style.opacity = '1';
+                pdAddBtn.onclick = addDetailToCart;
+                
+                pdBuyBtn.style.display = 'flex';
+            }
+
+            // Long Description
             const longDescDiv = document.getElementById('pdLongDesc');
             if (product.longDescription && product.longDescription.trim() !== '') {
-                longDescDiv.innerHTML = product.longDescription; // HTML render karega taakay table show ho
-                longDescDiv.style.display = 'block';
+                longDescDiv.innerHTML = product.longDescription;
             } else {
-                longDescDiv.style.display = 'none';
+                longDescDiv.innerHTML = "<p>No technical specifications available for this product.</p>";
             }
+
+            // Reset Qty
             currentDetailQuantity = 1;
             document.getElementById('detailQty').textContent = currentDetailQuantity;
 
-            // Handle add to cart button / out of stock
-            const addToCartButton = pageDetail.querySelector('.pd-add-btn');
-            if (product.availability === 'Out of stock') {
-                addToCartButton.textContent = 'Out of Stock - Notify Me';
-                addToCartButton.classList.remove('primary');
-                addToCartButton.classList.add('secondary');
-                addToCartButton.disabled = true;
-                addToCartButton.onclick = null; // Disable click
-            } else {
-                addToCartButton.innerHTML = '<i class="fas fa-cart-plus"></i> Add to Cart';
-                addToCartButton.classList.remove('secondary');
-                addToCartButton.classList.add('primary');
-                addToCartButton.disabled = false;
-                addToCartButton.onclick = addDetailToCart; // Re-enable click
-            }
+            // Load Reviews & Ratings
+            loadReviews();
 
-            // Populate "You May Also Like"
+            // Populate Related Products
             const alsoLikeScroll = document.getElementById('alsoLikeScroll');
             if (alsoLikeScroll) {
-                const relatedProducts = products.filter(p => p.category === product.category && p.id !== product.id && p.id !== 'so_base').slice(0, 5);
+                const relatedProducts = products.filter(p => p.category === product.category && p.id !== product.id && p.id !== 'so_base').slice(0, 8);
                 if (relatedProducts.length === 0) {
-                    alsoLikeScroll.innerHTML = `<p style="text-align:center;color:var(--secondary-text-color);">No similar products found.</p>`;
+                    alsoLikeScroll.innerHTML = `<p style="text-align:center;color:var(--text-muted);">No similar products found.</p>`;
                 } else {
                     alsoLikeScroll.innerHTML = relatedProducts.map(productCardTemplate).join('');
                 }
             }
+            
+            // Reset Tabs
+            switchPdpTab('desc');
         }
+        
+        function buyNow() {
+            addDetailToCart();
+            setTimeout(() => {
+                navigate('checkout');
+            }, 300);
+        }
+        
+        function shareProduct(type) {
+            const url = window.location.href;
+            if (type === 'wa') {
+                window.open(`https://wa.me/?text=${encodeURIComponent(url)}`);
+            } else if (type === 'fb') {
+                window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`);
+            } else {
+                navigator.clipboard.writeText(url).then(() => alert("Link copied to clipboard!"));
+            }
+        }
+        
+        function switchPdpTab(tabId) {
+            document.querySelectorAll('.pdp-tab-btn').forEach(b => {
+                b.classList.remove('active');
+                b.style.color = 'var(--text-muted)';
+                b.style.borderBottom = 'none';
+            });
+            document.querySelectorAll('.pdp-tab-content').forEach(c => c.style.display = 'none');
+            
+            const btn = document.getElementById('tab-' + tabId);
+            btn.classList.add('active');
+            btn.style.color = 'var(--primary-blue)';
+            btn.style.borderBottom = '3px solid var(--primary-blue)';
+            
+            document.getElementById('content-' + tabId).style.display = 'block';
+        }
+        
+        // Review System Logic
+        let pdpReviews = [];
+        
+        function setReviewRating(val) {
+            document.getElementById('reviewRatingVal').value = val;
+            const stars = document.getElementById('reviewStarSelect').querySelectorAll('i');
+            stars.forEach((star, idx) => {
+                if (idx < val) {
+                    star.style.color = '#ffc107';
+                    star.classList.remove('far');
+                    star.classList.add('fas');
+                } else {
+                    star.style.color = '#e0e0e0';
+                    star.classList.remove('fas');
+                    star.classList.add('fas'); // Keep fas but gray color
+                }
+            });
+        }
+        
+        async function loadReviews() {
+            const listEl = document.getElementById('reviewsList');
+            const sort = document.getElementById('reviewSort').value;
+            
+            if (!db) {
+                listEl.innerHTML = '<p>Database not connected.</p>';
+                return;
+            }
+            
+            try {
+                const snapshot = await db.collection('reviews')
+                    .where('productId', '==', detailPageProductId)
+                    .get();
+                    
+                pdpReviews = [];
+                let totalRating = 0;
+                
+                snapshot.forEach(doc => {
+                    const data = doc.data();
+                    pdpReviews.push({ id: doc.id, ...data });
+                    totalRating += Number(data.rating || 0);
+                });
+                
+                // Update UI counts
+                const count = pdpReviews.length;
+                document.getElementById('tabReviewCount').textContent = count;
+                document.getElementById('pdReviewCount').textContent = `(${count} Reviews)`;
+                
+                if (count > 0) {
+                    const avg = (totalRating / count).toFixed(1);
+                    updateAverageStars(avg);
+                } else {
+                    updateAverageStars(0);
+                }
+                
+                // Sort
+                if (sort === 'highest') pdpReviews.sort((a,b) => b.rating - a.rating);
+                else if (sort === 'lowest') pdpReviews.sort((a,b) => a.rating - b.rating);
+                else pdpReviews.sort((a,b) => b.timestamp - a.timestamp); // newest
+                
+                // Render
+                if (pdpReviews.length === 0) {
+                    listEl.innerHTML = '<p style="color: var(--text-muted); text-align: center; padding: 40px 0;">No reviews yet. Be the first to review this product!</p>';
+                } else {
+                    listEl.innerHTML = pdpReviews.map(r => `
+                        <div style="border-bottom: 1px solid var(--border-color); padding: 20px 0; margin-bottom: 20px;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                                <div style="font-weight: 600; color: var(--bg-dark);">${r.name}</div>
+                                <div style="color: var(--text-muted); font-size: 0.85rem;">${new Date(r.timestamp).toLocaleDateString()}</div>
+                            </div>
+                            <div style="color: #ffc107; margin-bottom: 10px; font-size: 0.9rem;">
+                                ${Array(5).fill(0).map((_, i) => i < r.rating ? '<i class="fas fa-star"></i>' : '<i class="far fa-star"></i>').join('')}
+                            </div>
+                            <p style="color: var(--text-dark); line-height: 1.6;">${r.text}</p>
+                        </div>
+                    `).join('');
+                }
+                
+            } catch (err) {
+                console.error("Error loading reviews", err);
+                listEl.innerHTML = '<p>Error loading reviews. Please try again later.</p>';
+            }
+        }
+        
+        function updateAverageStars(avg) {
+            const starContainer = document.getElementById('pdAvgStars');
+            let html = '';
+            for(let i=1; i<=5; i++) {
+                if(avg >= i) html += '<i class="fas fa-star"></i>';
+                else if(avg >= i - 0.5) html += '<i class="fas fa-star-half-alt"></i>';
+                else html += '<i class="far fa-star"></i>';
+            }
+            html += ` <span style="color: var(--bg-dark); font-weight: 600; font-size: 1rem; margin-left: 5px;">${avg > 0 ? avg : ''}</span>`;
+            starContainer.innerHTML = html;
+        }
+        
+        async function submitReview(e) {
+            e.preventDefault();
+            const rating = Number(document.getElementById('reviewRatingVal').value);
+            const name = document.getElementById('reviewName').value;
+            const text = document.getElementById('reviewText').value;
+            
+            if (rating === 0) {
+                alert("Please select a star rating.");
+                return;
+            }
+            
+            const btn = e.target.querySelector('button[type="submit"]');
+            const origText = btn.textContent;
+            btn.textContent = "Submitting...";
+            btn.disabled = true;
+            
+            try {
+                await db.collection('reviews').add({
+                    productId: detailPageProductId,
+                    rating: rating,
+                    name: name,
+                    text: text,
+                    timestamp: Date.now()
+                });
+                
+                alert("Thank you! Your review has been submitted.");
+                e.target.reset();
+                setReviewRating(0); // reset stars
+                loadReviews(); // reload
+            } catch (err) {
+                console.error("Error saving review", err);
+                alert("Failed to submit review.");
+            } finally {
+                btn.textContent = origText;
+                btn.disabled = false;
+            }
+        }
+
 
         function renderCartPage() {
             const hasItems = cart.length > 0;
@@ -3115,7 +3436,178 @@ function doExit() {
             navigate('home');
         }
 
-        function renderInfoPage(title, contentHtml) {
+        
+function renderFAQPage() {
+    renderInfoPage('FAQ', `
+        <div class="faq-section" style="max-width: 800px; margin: 0 auto; padding: 20px;">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-item" style="margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px;">
+                <h4 style="color: var(--primary-blue); cursor: pointer;" onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'none' ? 'block' : 'none'">Q: What payment methods do you accept?</h4>
+                <p style="display:none; color: var(--secondary-text-color); margin-top: 5px;">A: We accept Bank Transfers, EasyPaisa, JazzCash, and Cash on Delivery (for specific areas).</p>
+            </div>
+            <div class="faq-item" style="margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px;">
+                <h4 style="color: var(--primary-blue); cursor: pointer;" onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'none' ? 'block' : 'none'">Q: Do you offer installation services?</h4>
+                <p style="display:none; color: var(--secondary-text-color); margin-top: 5px;">A: Yes, we offer complete professional installation services across South Punjab.</p>
+            </div>
+            <div class="faq-item" style="margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px;">
+                <h4 style="color: var(--primary-blue); cursor: pointer;" onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'none' ? 'block' : 'none'">Q: How long does shipping take?</h4>
+                <p style="display:none; color: var(--secondary-text-color); margin-top: 5px;">A: Orders are usually processed within 24 hours. Delivery takes 2-5 business days depending on your location.</p>
+            </div>
+        </div>
+    `);
+}
+
+function renderShippingPolicy() {
+    renderInfoPage('Shipping Policy', `
+        <h2>Shipping Policy</h2>
+        <p>At AL Noor Solar Energy, we aim to deliver your products safely and efficiently.</p>
+        <h3>Processing Time</h3>
+        <p>All orders are processed within 1-2 business days. Orders are not shipped or delivered on weekends or holidays.</p>
+        <h3>Shipping Rates & Delivery Estimates</h3>
+        <p>Shipping charges for your order will be calculated and displayed at checkout. For heavy items like solar panels and batteries, special freight charges may apply.</p>
+        <h3>Damages</h3>
+        <p>AL Noor Solar Energy is not liable for any products damaged or lost during shipping. If you received your order damaged, please contact the shipment carrier to file a claim. Please save all packaging materials and damaged goods before filing a claim.</p>
+    `);
+}
+
+function renderBlogPage() {
+    renderInfoPage('Blog', `
+        <div class="blog-container" style="max-width: 1000px; margin: 0 auto; padding: 20px;">
+            <div style="text-align: center; margin-bottom: 40px;">
+                <h1 style="color: var(--bg-dark); font-size: 2.5rem; margin-bottom: 10px;">Solar Energy Insights</h1>
+                <p style="color: var(--text-muted);">Stay updated with the latest news, tips, and trends in solar technology.</p>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 30px;">
+                
+                <div class="blog-card" style="background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: transform 0.3s; cursor:pointer;" onclick="navigate('blog-single')">
+                    <div style="height: 200px; background: url('assets/images/rooftop-showcase.webp') center/cover;"></div>
+                    <div style="padding: 20px;">
+                        <span style="background: var(--primary-light); color: var(--primary-blue); padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: bold;">Guide</span>
+                        <h3 style="margin: 15px 0 10px; color: var(--bg-dark);">How to Choose the Right Solar Inverter</h3>
+                        <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; margin-bottom: 15px;">Discover the key factors to consider when selecting an inverter for your home or business solar system.</p>
+                        <div style="display: flex; justify-content: space-between; align-items: center; color: #888; font-size: 0.85rem;">
+                            <span><i class="far fa-calendar-alt"></i> Oct 15, 2025</span>
+                            <span style="color: var(--primary-blue); font-weight: bold;">Read More →</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="blog-card" style="background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: transform 0.3s; cursor:pointer;" onclick="navigate('blog-single')">
+                    <div style="height: 200px; background: url('assets/images/installation-about.webp') center/cover;"></div>
+                    <div style="padding: 20px;">
+                        <span style="background: #e8f5e9; color: #2e7d32; padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: bold;">Maintenance</span>
+                        <h3 style="margin: 15px 0 10px; color: var(--bg-dark);">Tips for Maintaining Solar Panels</h3>
+                        <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; margin-bottom: 15px;">Learn how to keep your solar panels clean and efficient to maximize their lifespan and energy production.</p>
+                        <div style="display: flex; justify-content: space-between; align-items: center; color: #888; font-size: 0.85rem;">
+                            <span><i class="far fa-calendar-alt"></i> Nov 02, 2025</span>
+                            <span style="color: var(--primary-blue); font-weight: bold;">Read More →</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="blog-card" style="background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: transform 0.3s; cursor:pointer;" onclick="navigate('blog-single')">
+                    <div style="height: 200px; background: url('assets/images/category-batteries.webp') center/cover;"></div>
+                    <div style="padding: 20px;">
+                        <span style="background: #fff3e0; color: #ef6c00; padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: bold;">Technology</span>
+                        <h3 style="margin: 15px 0 10px; color: var(--bg-dark);">The Future of Lithium Batteries</h3>
+                        <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; margin-bottom: 15px;">Explore the latest advancements in lithium battery storage technology and what it means for solar owners.</p>
+                        <div style="display: flex; justify-content: space-between; align-items: center; color: #888; font-size: 0.85rem;">
+                            <span><i class="far fa-calendar-alt"></i> Dec 10, 2025</span>
+                            <span style="color: var(--primary-blue); font-weight: bold;">Read More →</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    `);
+}
+
+function renderBlogSingle() {
+    renderInfoPage('How to Choose the Right Solar Inverter', `
+        <div style="max-width: 800px; margin: 0 auto; padding: 20px;">
+            <img src="assets/images/rooftop-showcase.webp" style="width: 100%; border-radius: 12px; margin-bottom: 30px;">
+            <div style="color: #888; margin-bottom: 20px;">
+                <span><i class="far fa-calendar-alt"></i> Oct 15, 2025</span> | 
+                <span><i class="far fa-folder"></i> Guide</span>
+            </div>
+            <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-dark); margin-bottom: 20px;">
+                Selecting the right solar inverter is crucial for the efficiency and reliability of your solar power system. The inverter is the heart of the system, converting the DC power generated by the panels into AC power that your home can use.
+            </p>
+            <h3 style="color: var(--bg-dark); margin: 30px 0 15px;">1. Understand Your Energy Needs</h3>
+            <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-dark); margin-bottom: 20px;">
+                Before you choose an inverter, you need to understand how much energy your household consumes. Look at your past electricity bills to determine your average daily usage.
+            </p>
+            <h3 style="color: var(--bg-dark); margin: 30px 0 15px;">2. Types of Inverters</h3>
+            <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-dark); margin-bottom: 20px;">
+                There are mainly three types: On-grid, Off-grid, and Hybrid. Hybrid inverters are the most popular in Pakistan as they allow you to store excess energy in batteries for use during load shedding while still being connected to the grid.
+            </p>
+            <h3 style="color: var(--bg-dark); margin: 30px 0 15px;">3. Look for Quality Brands</h3>
+            <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-dark); margin-bottom: 20px;">
+                Always opt for reputable brands like Knox, Solis, Goodwe, and Growatt. These brands offer reliable performance, good warranties, and after-sales support.
+            </p>
+            <div style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee;">
+                <button class="primary" onclick="navigate('blog')" style="padding: 10px 20px; border: none; background: var(--primary-blue); color: white; border-radius: 5px; cursor: pointer;">← Back to Blog</button>
+            </div>
+        </div>
+    `);
+}
+
+function renderBrandsPage() {
+    renderInfoPage('Brands', `
+        <div style="text-align: center; max-width: 1000px; margin: 0 auto; padding: 20px;">
+            <p style="font-size: 1.1rem; color: var(--text-muted); margin-bottom: 40px;">We partner with the world's leading solar manufacturers to bring you tier-1 quality products with official warranties.</p>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 30px; align-items: center;">
+                <div style="padding: 30px; border: 1px solid #eee; border-radius: 12px; background: white; text-align: center;">
+                    <img src="https://kamalsolar.pk/cdn/shop/files/Frame_178_930x.png?v=1737729038" alt="Longi Solar" style="max-width: 100%; max-height: 60px; object-fit: contain;" loading="lazy">
+                    <p style="margin-top: 10px; font-weight: 600;">Longi Solar</p>
+                </div>
+                <div style="padding: 30px; border: 1px solid #eee; border-radius: 12px; background: white; text-align: center;">
+                    <img src="https://kamalsolar.pk/cdn/shop/files/Frame_174_930x.png?v=1737729038" alt="JA Solar" style="max-width: 100%; max-height: 60px; object-fit: contain;" loading="lazy">
+                    <p style="margin-top: 10px; font-weight: 600;">JA Solar</p>
+                </div>
+                <div style="padding: 30px; border: 1px solid #eee; border-radius: 12px; background: white; text-align: center;">
+                    <img src="https://kamalsolar.pk/cdn/shop/files/Frame_177_930x.png?v=1737729038" alt="Solis Inverters" style="max-width: 100%; max-height: 60px; object-fit: contain;" loading="lazy">
+                    <p style="margin-top: 10px; font-weight: 600;">Solis Inverters</p>
+                </div>
+                <div style="padding: 30px; border: 1px solid #eee; border-radius: 12px; background: white; text-align: center;">
+                    <img src="https://kamalsolar.pk/cdn/shop/files/Frame_176_930x.png?v=1737729038" alt="Knox Inverters" style="max-width: 100%; max-height: 60px; object-fit: contain;" loading="lazy">
+                    <p style="margin-top: 10px; font-weight: 600;">Knox Inverters</p>
+                </div>
+                <div style="padding: 30px; border: 1px solid #eee; border-radius: 12px; background: white; text-align: center;">
+                    <img src="https://kamalsolar.pk/cdn/shop/files/Frame_178_930x.png?v=1737729038" alt="Goodwe Inverters" style="max-width: 100%; max-height: 60px; object-fit: contain;" loading="lazy">
+                    <p style="margin-top: 10px; font-weight: 600;">Goodwe Inverters</p>
+                </div>
+                <div style="padding: 30px; border: 1px solid #eee; border-radius: 12px; background: white; text-align: center;">
+                    <img src="https://kamalsolar.pk/cdn/shop/files/Frame_177_930x.png?v=1737729038" alt="Growatt Inverters" style="max-width: 100%; max-height: 60px; object-fit: contain;" loading="lazy">
+                    <p style="margin-top: 10px; font-weight: 600;">Growatt Inverters</p>
+                </div>
+            </div>
+        </div>
+    `);
+}
+
+function renderThankYouPage() {
+    const page = document.getElementById('page-thank-you');
+    page.innerHTML = `
+        <div style="max-width: 600px; margin: 100px auto; text-align: center; padding: 40px; background: white; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); animation: fadeInUp 0.5s ease;">
+            <div style="width: 80px; height: 80px; background: #4CAF50; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 40px; margin: 0 auto 20px;">
+                <i class="fas fa-check"></i>
+            </div>
+            <h1 style="color: var(--bg-dark); margin-bottom: 15px;">Order Placed Successfully!</h1>
+            <p style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 30px;">Thank you for your purchase. We have received your order and will contact you shortly to confirm delivery details.</p>
+            <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 30px; text-align: left;">
+                <p><strong>Order Status:</strong> Pending Confirmation</p>
+                <p><strong>Support:</strong> <a href="tel:03006771013" style="color: var(--primary-blue);">0300-6771013</a></p>
+            </div>
+            <button class="primary" onclick="navigate('home')" style="padding: 12px 30px; font-size: 1.1rem; width: auto; background: var(--primary-blue); color: white; border: none; border-radius: 6px; cursor: pointer;">Return to Home</button>
+        </div>
+    `;
+    page.classList.add('active');
+}
+
+function renderInfoPage(title, contentHtml) {
             const pageId = title.toLowerCase().replace(/\s/g, '-');
             const pageElement = document.getElementById(`page-${pageId}`);
             if (pageElement) {

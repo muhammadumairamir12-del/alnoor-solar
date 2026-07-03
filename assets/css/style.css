@@ -7,6 +7,7 @@
 
 :root {
     --primary: #1A66FF;
+    --primary-blue: var(--primary);
     --primary-light: #E7F4FF;
     --primary-dark: #004FE6;
     --accent: #FFB800;
@@ -43,18 +44,20 @@
     padding: 0;
 }
 
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
 html {
     scroll-behavior: smooth;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
 }
-
 body {
     font-family: var(--font-body);
     background-color: var(--white);
     color: var(--text-dark);
     line-height: 1.6;
-    overflow-x: hidden;
     padding-bottom: var(--bottom-nav-height);
 }
 
@@ -3144,44 +3147,310 @@ footer {
 }
 
 /* Global Mobile Navigation Hiding (Desktop fallback) */
-.mobile-nav-panel {
-    display: none;
-}
-.mob-overlay {
-    display: none;
+@media(min-width: 769px) {
+    .mobile-nav-panel, .mob-overlay {
+        display: none !important;
+    }
 }
 
 /* WhatsApp Floating Button */
 .whatsapp-float {
     position: fixed;
-    bottom: 20px;
-    left: 20px;
-    width: 56px;
-    height: 56px;
+    bottom: 25px;
+    right: 25px;
+    width: 60px;
+    height: 60px;
     background-color: #25d366;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+    box-shadow: 0 4px 16px rgba(37, 211, 102, 0.45);
     z-index: 9999;
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
+    animation: waPulse 2s infinite;
 }
 
 .whatsapp-float:hover {
     transform: scale(1.1);
-    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+    box-shadow: 0 6px 24px rgba(37, 211, 102, 0.65);
 }
 
 .whatsapp-float img {
-    width: 30px;
-    height: 30px;
+    width: 32px;
+    height: 32px;
     object-fit: contain;
+}
+
+@keyframes waPulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+    }
 }
 
 @media(max-width: 768px) {
     .whatsapp-float {
-        bottom: 80px; /* Float above mobile bottom nav bar */
+        bottom: 85px; /* Float above mobile bottom nav bar */
+        right: 20px;
+    }
+}
+
+/* Products Page Catalog Layout Grid (Desktop) */
+.products-page-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 30px;
+    margin-top: 40px;
+    margin-bottom: 60px;
+}
+
+.sidebar {
+    background-color: var(--white);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 24px;
+    height: fit-content;
+    box-shadow: var(--shadow-sm);
+}
+
+.sidebar-section {
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.sidebar-section:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.sidebar-section h4 {
+    font-size: 1.1rem;
+    color: var(--bg-dark);
+    margin-bottom: 12px;
+    font-weight: 700;
+}
+
+.sidebar-section ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.sidebar-section ul a {
+    color: var(--text-muted);
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: var(--transition);
+}
+
+.sidebar-section ul a:hover {
+    color: var(--primary);
+    padding-left: 4px;
+}
+
+.price-range {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.price-range input {
+    flex: 1;
+    min-width: 60px;
+    padding: 8px 12px;
+    margin-bottom: 0;
+    font-size: 0.9rem;
+    height: 40px;
+}
+
+.price-range span {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.price-range button {
+    height: 40px;
+    padding: 0 16px;
+    font-size: 0.9rem;
+}
+
+/* Mobile Navigation Slide Panel & Overlay Layouts */
+@media(max-width: 768px) {
+    /* Hamburger and header icon alignments to balance header logo */
+    .hamburger-btn {
+        order: 1 !important;
+        width: 50px !important;
+        justify-content: flex-start !important;
+        display: flex !important;
+    }
+    .logo-wrap {
+        order: 2 !important;
+        margin: 0 auto !important;
+        text-align: center !important;
+    }
+    .hdr-icons {
+        order: 3 !important;
+        width: 50px !important;
+        justify-content: flex-end !important;
+        display: flex !important;
+    }
+
+    /* Products Grid & Sidebar stacking */
+    .products-page-layout {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    /* Hero vertical stacking & decoration hiding */
+    #hero .container {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        gap: 20px !important;
+        text-align: center !important;
+        padding-top: 40px !important;
+        padding-bottom: 40px !important;
+        height: auto !important;
+    }
+    .floating-decorations {
+        display: none !important;
+    }
+    .hero-btns {
+        justify-content: center !important;
+    }
+    .hero-badges {
+        justify-content: center !important;
+        flex-wrap: wrap !important;
+    }
+
+    /* Mobile Slide Panel & overlays */
+    .mobile-nav-panel {
+        display: flex !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: -300px !important;
+        width: 300px !important;
+        height: 100vh !important;
+        background-color: var(--white) !important;
+        z-index: 10000 !important;
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        box-shadow: 4px 0 24px rgba(0, 0, 0, 0.15) !important;
+        flex-direction: column !important;
+        padding: 0 !important;
+    }
+
+    .mobile-nav-panel.open {
+        transform: translateX(300px) !important;
+    }
+
+    .mob-overlay {
+        display: block !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100vh !important;
+        background-color: rgba(7, 30, 74, 0.5) !important;
+        backdrop-filter: blur(4px) !important;
+        z-index: 9999 !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+        transition: opacity 0.3s ease !important;
+    }
+
+    .mob-overlay.open {
+        opacity: 1 !important;
+        pointer-events: auto !important;
+    }
+
+    /* Panel elements */
+    .mnp-header {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding: 20px 24px !important;
+        border-bottom: 1px solid var(--border-color) !important;
+    }
+
+    .mnp-logo {
+        display: flex !important;
+        align-items: center !important;
+        gap: 10px !important;
+        font-weight: 700 !important;
+        color: var(--bg-dark) !important;
+    }
+
+    .mnp-logo img {
+        height: 36px !important;
+        width: 36px !important;
+        object-fit: contain !important;
+    }
+
+    .mnp-close {
+        background: none !important;
+        border: none !important;
+        font-size: 1.5rem !important;
+        color: var(--text-muted) !important;
+        padding: 4px !important;
+        cursor: pointer !important;
+    }
+
+    .mnp-links {
+        display: flex !important;
+        flex-direction: column !important;
+        padding: 24px !important;
+        gap: 8px !important;
+        overflow-y: auto !important;
+        flex: 1 !important;
+    }
+
+    .mnp-link {
+        display: flex !important;
+        align-items: center !important;
+        gap: 12px !important;
+        padding: 12px 16px !important;
+        border-radius: var(--radius-sm) !important;
+        color: var(--text-dark) !important;
+        font-weight: 600 !important;
+        font-size: 1rem !important;
+        transition: var(--transition) !important;
+    }
+
+    .mnp-link:hover {
+        background-color: var(--primary-light) !important;
+        color: var(--primary) !important;
+        transform: translateX(4px) !important;
+    }
+
+    .mnp-icon {
+        font-size: 1.2rem !important;
+    }
+
+    .mnp-footer {
+        padding: 24px !important;
+        border-top: 1px solid var(--border-color) !important;
+        background-color: var(--light-gray) !important;
+    }
+
+    .mnp-contact-row {
+        font-size: 0.85rem !important;
+        color: var(--text-muted) !important;
+        margin-bottom: 8px !important;
+    }
+
+    .mnp-contact-row a {
+        color: var(--primary) !important;
+        font-weight: 600 !important;
     }
 }
 
@@ -3265,4 +3534,532 @@ footer {
 
 .pulse-anim {
     animation: cartPulse 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) both !important;
+}
+
+/* ==========================================================================
+   PRODUCT DETAIL PAGE (PDP) — Professional E-Commerce Layout
+   ========================================================================== */
+.pdp-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+}
+
+.pdp-main-img-wrap {
+    position: relative;
+    background: var(--light-gray);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    aspect-ratio: 1;
+}
+
+.pdp-main-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform 0.4s ease;
+}
+
+.pdp-sale-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: var(--danger);
+    color: white;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    z-index: 2;
+}
+
+.pdp-tabs-header {
+    display: flex;
+    border-bottom: 2px solid var(--border-color);
+    gap: 30px;
+    margin-bottom: 30px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+}
+
+.pdp-tabs-header::-webkit-scrollbar {
+    display: none;
+}
+
+.pdp-tab-btn {
+    background: none;
+    border: none;
+    padding: 15px 5px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    cursor: pointer;
+    margin-bottom: -2px;
+    white-space: nowrap;
+    transition: color 0.3s ease;
+}
+
+.pdp-tab-btn.active {
+    color: var(--primary);
+    border-bottom: 3px solid var(--primary);
+}
+
+.pdp-reviews-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 40px;
+}
+
+/* ==========================================================================
+   FAQ Page Accordion
+   ========================================================================== */
+.faq-item h4 {
+    position: relative;
+    padding-right: 30px;
+    transition: color 0.3s ease;
+}
+
+.faq-item h4::after {
+    content: '+';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.5rem;
+    color: var(--primary);
+    transition: transform 0.3s ease;
+}
+
+.faq-item h4.open::after {
+    content: '−';
+}
+
+/* ==========================================================================
+   Blog Cards
+   ========================================================================== */
+.blog-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.blog-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+}
+
+/* ==========================================================================
+   COMPREHENSIVE MOBILE-FIRST RESPONSIVE DESIGN
+   Progressive Enhancement from 320px upward
+   ========================================================================== */
+
+/* ── Base Mobile Fixes (320px+) ── */
+@media (max-width: 768px) {
+    /* PDP: Stack to single column */
+    .pdp-grid {
+        grid-template-columns: 1fr !important;
+        gap: 25px !important;
+    }
+    
+    .pdp-main-img-wrap {
+        max-height: 400px;
+    }
+    
+    /* PDP Reviews: Stack form and list */
+    .pdp-reviews-grid {
+        grid-template-columns: 1fr !important;
+        gap: 30px !important;
+    }
+    
+    /* PDP Tabs: Scrollable */
+    .pdp-tabs-header {
+        gap: 20px !important;
+    }
+    
+    .pdp-tab-btn {
+        font-size: 1rem !important;
+        padding: 12px 5px !important;
+    }
+    
+    /* PDP Action buttons: Stack on small screens */
+    .pdp-actions > div:last-child {
+        grid-template-columns: 1fr !important;
+    }
+    
+    /* Header: Hide top bar, compact header */
+    .header-top {
+        display: none !important;
+    }
+    
+    header .navbar {
+        padding: 0 12px !important;
+    }
+    
+    /* Desktop nav hidden on mobile */
+    .nav-links {
+        display: none !important;
+    }
+    
+    /* Hamburger visible */
+    .hamburger-btn {
+        display: flex !important;
+    }
+    
+    /* Hero section responsive */
+    .hero-section {
+        min-height: auto !important;
+        height: auto !important;
+        padding: 30px 0 !important;
+    }
+    
+    .hero-section h1 {
+        font-size: clamp(1.8rem, 6vw, 2.5rem) !important;
+        line-height: 1.2 !important;
+    }
+    
+    .hero-section p {
+        font-size: clamp(0.9rem, 3vw, 1.1rem) !important;
+    }
+    
+    /* Section headings responsive */
+    .section-heading {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        padding-top: 30px;
+    }
+    
+    .section-heading h2 {
+        font-size: clamp(1.5rem, 5vw, 2rem) !important;
+    }
+    
+    /* Category grid: 2 columns on mobile */
+    .categories-grid,
+    .cat-col-left {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px !important;
+    }
+    
+    /* Product grid: 2 columns on mobile */
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px !important;
+    }
+    
+    /* Product card mobile tweaks */
+    .product-card {
+        border-radius: var(--radius-sm) !important;
+    }
+    
+    .product-card .pc-name {
+        font-size: 0.85rem !important;
+        -webkit-line-clamp: 2;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    
+    .product-card .pc-price {
+        font-size: 1rem !important;
+    }
+    
+    /* Footer: Stack columns */
+    .footer-content {
+        grid-template-columns: 1fr !important;
+        gap: 25px !important;
+        text-align: center;
+    }
+    
+    .footer-content .social-links {
+        justify-content: center;
+    }
+    
+    .footer-bottom {
+        text-align: center;
+        font-size: 0.8rem;
+    }
+    
+    /* Bottom nav always visible */
+    .bottom-nav {
+        display: flex !important;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 9998;
+        background: var(--white);
+        border-top: 1px solid var(--border-color);
+        box-shadow: 0 -4px 12px rgba(0,0,0,0.06);
+        padding: 8px 0;
+        justify-content: space-around;
+    }
+    
+    .bnav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 3px;
+        font-size: 0.7rem;
+        color: var(--text-muted);
+        min-width: 50px;
+        padding: 4px 8px;
+        cursor: pointer;
+        transition: color 0.2s ease;
+        position: relative;
+    }
+    
+    .bnav-item i {
+        font-size: 1.15rem;
+    }
+    
+    .bnav-item.active {
+        color: var(--primary);
+    }
+    
+    .bnav-item.active::after {
+        content: '';
+        position: absolute;
+        top: -8px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 20px;
+        height: 3px;
+        background: var(--primary);
+        border-radius: 0 0 3px 3px;
+    }
+    
+    /* Ensure body padding for bottom nav */
+    body {
+        padding-bottom: 70px !important;
+    }
+    
+    /* WhatsApp above bottom nav */
+    .whatsapp-float {
+        bottom: 85px !important;
+        right: 20px !important;
+    }
+    
+    /* Promo slider mobile */
+    .promo-slider {
+        height: auto !important;
+        min-height: 200px !important;
+    }
+    
+    .promo-slide h2 {
+        font-size: clamp(1.2rem, 4vw, 1.8rem) !important;
+    }
+    
+    .promo-slide p {
+        font-size: clamp(0.8rem, 2.5vw, 1rem) !important;
+    }
+    
+    /* Special Offer Section Mobile */
+    .special-offer-section {
+        padding: 40px 15px !important;
+    }
+    
+    .special-offer-details h2 {
+        font-size: clamp(1.3rem, 5vw, 2rem) !important;
+    }
+    
+    /* Brand Marquee smaller */
+    .brand-logos img {
+        height: 40px !important;
+    }
+    
+    /* Cart page mobile */
+    .cart-full {
+        padding: 15px !important;
+    }
+    
+    .cart-item-row {
+        flex-direction: column !important;
+        gap: 12px !important;
+    }
+    
+    /* Checkout page mobile */
+    .checkout-grid {
+        grid-template-columns: 1fr !important;
+    }
+    
+    /* Search overlay mobile */
+    .search-overlay {
+        padding: 15px !important;
+    }
+    
+    /* Container padding */
+    .container {
+        padding: 0 15px !important;
+    }
+    
+    /* Page header text */
+    .page-header h1 {
+        font-size: clamp(1.5rem, 5vw, 2rem) !important;
+    }
+    
+    /* Info pages */
+    .page h2 {
+        font-size: clamp(1.3rem, 4vw, 1.8rem) !important;
+    }
+    
+    .page h3 {
+        font-size: clamp(1.1rem, 3.5vw, 1.4rem) !important;
+    }
+    
+    /* Sidebar on Products Page */
+    .products-page-layout {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+    }
+    
+    .sidebar {
+        order: -1;
+    }
+    
+    /* Mini Cart responsive */
+    .mini-cart-sidebar {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+}
+
+/* ── Very small screens (320px-359px) ── */
+@media (max-width: 359px) {
+    .product-grid {
+        grid-template-columns: 1fr !important;
+        gap: 15px !important;
+    }
+    
+    .categories-grid,
+    .cat-col-left {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .hero-section h1 {
+        font-size: 1.5rem !important;
+    }
+    
+    .pdp-main-img-wrap {
+        max-height: 300px;
+    }
+    
+    .section-heading h2 {
+        font-size: 1.3rem !important;
+    }
+}
+
+/* ── Tablet screens (768px-1023px) ── */
+@media (min-width: 769px) and (max-width: 1023px) {
+    .pdp-grid {
+        gap: 30px;
+    }
+    
+    .categories-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
+    
+    .product-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
+    
+    /* Bottom nav hidden on tablet */
+    .bottom-nav {
+        display: none !important;
+    }
+    
+    body {
+        padding-bottom: 0 !important;
+    }
+}
+
+/* ── Desktop (1024px+) ── */
+@media (min-width: 1024px) {
+    .bottom-nav {
+        display: none !important;
+    }
+    
+    body {
+        padding-bottom: 0 !important;
+    }
+    
+    .hamburger-btn {
+        display: none !important;
+    }
+    
+    .mobile-nav-panel {
+        display: none !important;
+    }
+    
+    .mob-overlay {
+        display: none !important;
+    }
+}
+
+/* ==========================================================================
+   SMOOTH ANIMATIONS
+   ========================================================================== */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* ==========================================================================
+   TOUCH-FRIENDLY IMPROVEMENTS
+   ========================================================================== */
+@media (hover: none) and (pointer: coarse) {
+    /* Minimum tap targets for touch devices */
+    button, a, .bnav-item, .mnp-link, select {
+        min-height: 44px;
+    }
+    
+    /* Remove hover effects on touch */
+    .product-card:hover {
+        transform: none;
+    }
+    
+    /* Better touch scrolling */
+    .prod-scroll, .pdp-tabs-header {
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory;
+    }
+    
+    .prod-scroll > * {
+        scroll-snap-align: start;
+    }
+}
+
+/* ==========================================================================
+   PRINT STYLES (for invoices/datasheets)
+   ========================================================================== */
+@media print {
+    .header-top, header, .bottom-nav, .whatsapp-float,
+    .mobile-nav-panel, .mob-overlay, .mini-cart-sidebar,
+    .overlay, #exitPopup {
+        display: none !important;
+    }
+    
+    body {
+        padding: 0 !important;
+    }
 }
