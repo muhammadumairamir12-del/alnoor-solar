@@ -2093,11 +2093,10 @@ function doExit() {
         });
 
         function addGlobalEventListeners() {
-            // Event listener for all navigation links (desktop nav and footer)
             document.querySelectorAll('.nav-link').forEach(link => {
                 link.addEventListener('click', (event) => {
                     event.preventDefault();
-                    const targetHash = event.target.getAttribute('href');
+                    const targetHash = link.getAttribute('href');
                     if (targetHash) {
                         navigate(targetHash);
                     }
