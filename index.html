@@ -13,8 +13,8 @@
     <link rel="canonical" href="https://al-noorsolarenergy.com/">
     
    <!-- Proper Search Logo (Favicon) -->
-<link rel="icon" href="/favicon.png" type="image/png">
-<link rel="apple-touch-icon" href="/favicon.png">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="favicon.png">
     <!-- Open Graph for Social Media & Google Discovery -->
     <meta property="og:site_name" content="AL Noor Solar Energy">
     <meta property="og:title" content="AL Noor Solar Energy | Best Solar Company in Multan">
@@ -1442,14 +1442,18 @@ function doExit() {
             return products.filter(p => p.category === categoryName && p.id !== 'so_base');
         }
 
-        // Helper to show toast messages
-        function showToast(message) {
+        // Helper to show toast messages — supports type: 'success' | 'warning' | 'error'
+        function showToast(message, type = 'success') {
             const toast = document.getElementById('toast');
             toast.textContent = message;
-            toast.classList.add('show');
-            setTimeout(() => {
+            // Clear previous type classes
+            toast.classList.remove('toast-success', 'toast-warning', 'toast-error');
+            toast.classList.add('toast-' + type, 'show');
+            const duration = type === 'error' ? 5000 : type === 'warning' ? 4000 : 3000;
+            clearTimeout(window._toastTimer);
+            window._toastTimer = setTimeout(() => {
                 toast.classList.remove('show');
-            }, 3000);
+            }, duration);
         }
 
         // ====================================================================================================
@@ -2028,7 +2032,8 @@ function doExit() {
 
             } catch (error) {
                 console.error("Firebase se products laane mein error:", error);
-                alert("Please check your internet connection.");
+                // Show a non-intrusive toast instead of a blocking alert
+                showToast('⚠️ Could not load products. Check your connection.', 'warning');
             }
         }
         
@@ -2043,6 +2048,35 @@ function doExit() {
 
             // 2. Background mein aaram se Firebase se data mangwao
             loadProductsFromFirebase();
+
+            // 3. Header shrink-on-scroll
+            const header = document.querySelector('header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 60) {
+                    header.classList.add('shrink');
+                } else {
+                    header.classList.remove('shrink');
+                }
+            }, { passive: true });
+
+            // 4. Scroll-reveal animations (IntersectionObserver)
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('revealed');
+                        revealObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+            // Observe sections and key elements
+            const revealTargets = document.querySelectorAll(
+                '.cat-item, .feature-card, .prod-section, .brands-we-love, .special-offer-section, .promo-slider-section, .image-links-grid, footer'
+            );
+            revealTargets.forEach(el => {
+                el.classList.add('scroll-reveal');
+                revealObserver.observe(el);
+            });
         });
 
         // Popstate event for browser back/forward buttons
