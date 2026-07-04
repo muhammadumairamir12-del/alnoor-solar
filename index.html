@@ -3418,6 +3418,8 @@ function doExit() {
 
             // Save phone for next time (demo purpose)
             localStorage.setItem('checkoutPhone', chkPhone.value);
+            // Save pending order state
+            localStorage.setItem('hasPendingOrder', 'true');
 
             let orderDetails = `*New Order from AL Noor Solar Energy*%0A%0A`;
             orderDetails += `*Contact Info:*%0A`;
@@ -4083,6 +4085,15 @@ function renderAboutPage() {
             page.classList.add('active');
         }
        
+        // On DOMContentLoaded check for pending order
+        document.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem('hasPendingOrder') === 'true') {
+                const banner = document.getElementById('pendingOrderBanner');
+                if (banner) {
+                    banner.classList.add('show');
+                }
+            }
+        });
     </script>
 
     <!-- MOBILE NAV OVERLAY -->
@@ -4117,7 +4128,17 @@ function renderAboutPage() {
 <!-- WhatsApp Floating Button -->
 <a href="https://wa.me/923006771013?text=Hello%20Al%20Noor%20Solar%20Energy%2C%20mujhe%20solar%20system%20ki%20details%20chahiye.%20Please%20guide%20me." 
    class="whatsapp-float" target="_blank">
+  <span class="wa-badge">2</span>
   <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
 </a>
+
+<!-- Pending Order Notification Banner -->
+<div id="pendingOrderBanner" class="pending-order-banner">
+    <div class="po-text">
+        <i class="fas fa-box-open"></i> You have a pending order.
+    </div>
+    <a href="#account" class="po-btn" onclick="navigate('account'); document.getElementById('pendingOrderBanner').classList.remove('show');">View Details</a>
+</div>
+
 </body>
 </html>

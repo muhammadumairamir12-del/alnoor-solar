@@ -5012,3 +5012,109 @@ img {
         align-items: center;
     }
 }
+
+/* ==========================================================================
+   NEW UX FEATURES: Order Persistence, WhatsApp Badge & Nav Animations
+   ========================================================================== */
+
+/* 1. WhatsApp Button Badge & White Icon */
+.whatsapp-float img {
+    filter: brightness(0) invert(1); /* Makes the icon pure white */
+}
+
+.whatsapp-float {
+    overflow: visible !important; /* ensure badge is not clipped */
+}
+
+.wa-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: #ff3b30;
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    animation: gentle-pulse 2s infinite ease-in-out;
+}
+
+@keyframes gentle-pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(255, 59, 48, 0.7);
+    }
+    50% {
+        transform: scale(1.1);
+        box-shadow: 0 0 0 10px rgba(255, 59, 48, 0);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(255, 59, 48, 0);
+    }
+}
+
+/* 2. Pending Order Banner */
+.pending-order-banner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(135deg, #1565C0, #0D47A1);
+    color: white;
+    z-index: 2000;
+    padding: 12px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transform: translateY(-100%);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.pending-order-banner.show {
+    transform: translateY(0);
+}
+
+.pending-order-banner .po-text {
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.pending-order-banner .po-btn {
+    background: white;
+    color: #1565C0;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+
+.pending-order-banner .po-btn:hover {
+    background: #e3f2fd;
+}
+
+/* 3. Mobile Nav Panel Smooth Animation Override */
+@media (max-width: 768px) {
+    .mobile-nav-panel {
+        /* Override old 'left' transition with transform for smoother GPU rendering */
+        left: 0 !important;
+        transform: translateX(-100%);
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    }
+    .mobile-nav-panel.open {
+        transform: translateX(0);
+    }
+}
