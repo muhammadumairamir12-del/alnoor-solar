@@ -3231,6 +3231,10 @@ footer {
     border-bottom: none;
 }
 
+.filter-toggle-btn {
+    display: none !important;
+}
+
 .sidebar-section h4 {
     font-size: 1.1rem;
     color: var(--bg-dark);
@@ -3913,7 +3917,38 @@ footer {
     }
     
     .sidebar {
+        display: none !important; /* Hidden on mobile by default */
         order: -1;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    
+    .sidebar.open {
+        display: block !important; /* Shown when toggled open */
+        animation: fadeIn 0.4s ease;
+    }
+    
+    .filter-toggle-btn {
+        display: flex !important;
+        width: 100%;
+        padding: 12px;
+        background: linear-gradient(135deg, var(--bg-dark) 0%, #0A3080 100%);
+        color: var(--white);
+        border: none;
+        border-radius: var(--radius-md);
+        font-weight: bold;
+        font-size: 0.95rem;
+        cursor: pointer;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        margin-bottom: 10px;
+        box-shadow: var(--shadow-sm);
+        transition: transform 0.2s, opacity 0.2s;
+    }
+    
+    .filter-toggle-btn:active {
+        transform: scale(0.98);
     }
     
     /* Mini Cart responsive */

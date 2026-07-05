@@ -711,9 +711,9 @@
       </section>
 
     </section><!-- /page-home -->
-<section class="page container" id="page-services"></section>
-<section class="page container" id="page-about"></section>
-    <section class="page container" id="page-products"></section>
+<section class="page" id="page-services"></section>
+<section class="page" id="page-about"></section>
+    <section class="page" id="page-products"></section>
 <section class="page container" id="page-product">
         <div class="breadcrumb" style="margin-bottom: 20px; animation: fadeIn 0.4s ease;">
             <span onclick="history.back()" style="cursor:pointer; font-weight: bold; color: var(--primary); display: inline-flex; align-items: center; gap: 5px;">
@@ -2671,7 +2671,10 @@ function doExit() {
                 </div>
 
                 <div class="container products-page-layout" style="animation: fadeInUp 0.8s ease;">
-                    <aside class="sidebar">
+                    <button class="filter-toggle-btn" onclick="document.getElementById('productsSidebar').classList.toggle('open'); this.innerHTML = document.getElementById('productsSidebar').classList.contains('open') ? '<i class=\'fas fa-times\'></i> Close Filters' : '<i class=\'fas fa-filter\'></i> Show Filters';">
+                        <i class="fas fa-filter"></i> Show Filters
+                    </button>
+                    <aside class="sidebar" id="productsSidebar">
                         <div class="sidebar-section">
                             <h4>Categories</h4>
                             <ul>
@@ -2683,19 +2686,6 @@ function doExit() {
                                 <li><a href="#solar-panels" class="nav-link">Solar Panels</a></li>
                                 <li><a href="#module-authenticity" class="nav-link">Module Authenticity</a></li>
                             </ul>
-                        </div>
-                        <div class="sidebar-section">
-                            <h4>Brands</h4>
-                            <div class="filter-group">
-                                ${['Knox', 'Solis', 'Anicsun', 'Canadian Solar', 'Goodwe', 'Growatt', 'Crown Solar', 'Huawei', 'Inverex', 'Tiger Solar'].map(brand => {
-                                    const isChecked = params.get('brand') && params.get('brand').split(',').includes(brand);
-                                    return `
-                                        <label style="display:flex; align-items:center; gap:8px; margin-bottom:6px; cursor:pointer;">
-                                            <input type="checkbox" class="brand-filter-chk" value="${brand}" ${isChecked ? 'checked' : ''} aria-label="${brand} Filter"> ${brand}
-                                        </label>
-                                    `;
-                                }).join('')}
-                            </div>
                         </div>
                         <div class="sidebar-section">
                             <h4>Brands</h4>
@@ -2868,7 +2858,10 @@ function doExit() {
                 </div>
 
                 <div class="container products-page-layout" style="animation: fadeInUp 0.8s ease;">
-                    <aside class="sidebar">
+                    <button class="filter-toggle-btn" onclick="document.getElementById('productsSidebar').classList.toggle('open'); this.innerHTML = document.getElementById('productsSidebar').classList.contains('open') ? '<i class=\'fas fa-times\'></i> Close Filters' : '<i class=\'fas fa-filter\'></i> Show Filters';">
+                        <i class="fas fa-filter"></i> Show Filters
+                    </button>
+                    <aside class="sidebar" id="productsSidebar">
                         <div class="sidebar-section">
                             <h4>Categories</h4>
                             <ul>
