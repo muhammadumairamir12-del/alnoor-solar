@@ -2435,53 +2435,34 @@ function doExit() {
                 discountHtml = `<span class="badge-discount">-${discount}%</span>`;
             }
             
-            const stockClass = product.availability === 'In stock' ? '' : 'out';
-            const stockText = product.availability === 'In stock' ? 'In Stock' : 'Out of Stock';
-            const stockHtml = `<span class="badge-stock ${stockClass}">${stockText}</span>`;
-            
+            let promoHtml = '';
+            if (product.promoBadge && product.promoBadge.trim() !== '') {
+                promoHtml = `<span class="badge-discount" style="background-color:#2d9e5a;">${product.promoBadge}</span>`;
+            }
+
             const priceHtml = hasOldPrice ? 
                 `<div class="pc-price">${formatPrice(product.price)} <span>${formatPrice(product.oldPrice)}</span></div>` :
                 `<div class="pc-price">${formatPrice(product.price)}</div>`;
                 
             const addToCartBtn = product.availability === 'In stock' ?
-                `<button class="pc-btn" aria-label="Add ${product.name} to cart" onclick="event.preventDefault(); event.stopPropagation(); addToCart('${product.id}')">Add to Cart</button>` :
-                `<button class="pc-btn out" disabled style="background-color: var(--text-muted); color: var(--white); border-color: var(--text-muted); cursor: not-allowed;" aria-label="Out of stock">Out of Stock</button>`;
-
-            const hash = product.id.charCodeAt(0) % 2;
-            const stars = hash === 0 ? 5 : 4;
-            let starsHtml = '<div class="rating-stars">';
-            for (let i = 0; i < 5; i++) {
-                if (i < stars) {
-                    starsHtml += '<i class="fas fa-star"></i>';
-                } else {
-                    starsHtml += '<i class="far fa-star"></i>';
-                }
-            }
-            starsHtml += '</div>';
-
-            let promoHtml = '';
-            if (product.promoBadge && product.promoBadge.trim() !== '') {
-                promoHtml = `<span class="badge-discount" style="background-color: var(--success);">${product.promoBadge}</span>`;
-            }
+                `<button class="pc-btn" aria-label="Add ${product.name} to cart" onclick="event.preventDefault(); event.stopPropagation(); addToCart('${product.id}')">ADD TO CART</button>` :
+                `<button class="pc-btn out" disabled aria-label="Out of stock">OUT OF STOCK</button>`;
 
             return `
-                <a href="#product?id=${product.id}" class="pc nav-link" style="animation: fadeInUp 0.6s ease backwards; animation-delay: ${index * 0.05}s;">
+                <a href="#product?id=${product.id}" class="pc nav-link" style="animation: fadeInUp 0.5s ease backwards; animation-delay: ${index * 0.04}s;">
                     <div class="pc-img">
                         <div class="card-badges">
                             ${discountHtml}
                             ${promoHtml}
-                            ${stockHtml}
                         </div>
                         <img src="${product.image}" alt="${product.name} Image" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='https://via.placeholder.com/220x220?text=Solar+Product';">
-                        <div class="card-actions">
-                            <button class="action-btn" aria-label="Add to Wishlist" onclick="event.preventDefault(); showToast('Added to wishlist!')"><i class="far fa-heart"></i></button>
-                            <button class="action-btn" aria-label="Quick View" onclick="event.preventDefault(); navigate('product?id=${product.id}')"><i class="far fa-eye"></i></button>
+                        <div class="pc-quick-view" onclick="event.preventDefault(); event.stopPropagation(); navigate('product?id=${product.id}')">
+                            <i class="far fa-eye"></i> Quick View
                         </div>
                     </div>
                     <div class="pc-body">
-                        <p class="vendor">${product.vendor}</p>
+                        <p class="vendor">${product.vendor || product.brand || ''}</p>
                         <h3>${product.name}</h3>
-                        ${starsHtml}
                         ${priceHtml}
                         ${addToCartBtn}
                     </div>
@@ -2661,69 +2642,79 @@ function doExit() {
             }
 
             document.getElementById('page-products').innerHTML = `
-                <div class="page-header" style="animation: fadeIn 0.6s ease;">
+                <div class="products-breadcrumb-bar" style="animation: fadeIn 0.5s ease;">
                     <div class="container">
-                        <h1>All Products</h1>
-                        <div class="breadcrumbs">
-                            <a href="#home" class="nav-link">Home</a> <span>/</span> Products
+                        <div class="products-breadcrumb-inner">
+                            <div class="products-breadcrumbs">
+                                <a href="#home" class="nav-link">Home</a>
+                                <span>›</span>
+                                <span>Products</span>
+                            </div>
+                            <h1>Products</h1>
                         </div>
                     </div>
                 </div>
 
-                <div class="container products-page-layout" style="animation: fadeInUp 0.8s ease;">
+                <div class="container products-page-layout" style="animation: fadeInUp 0.7s ease;">
                     <button class="filter-toggle-btn" onclick="document.getElementById('productsSidebar').classList.toggle('open'); this.innerHTML = document.getElementById('productsSidebar').classList.contains('open') ? '<i class=\'fas fa-times\'></i> Close Filters' : '<i class=\'fas fa-filter\'></i> Show Filters';">
                         <i class="fas fa-filter"></i> Show Filters
                     </button>
                     <aside class="sidebar" id="productsSidebar">
-                        <div class="sidebar-section">
-                            <h4>Categories</h4>
-                            <ul>
-                                <li><a href="#products" class="nav-link">All Products</a></li>
-                                <li><a href="#solar-inverters" class="nav-link">Solar Inverters</a></li>
-                                <li><a href="#lithium-batteries" class="nav-link">Lithium Batteries</a></li>
-                                <li><a href="#vfd-inverters" class="nav-link">VFD Inverters</a></li>
-                                <li><a href="#other-accessories" class="nav-link">Other Accessories</a></li>
-                                <li><a href="#solar-panels" class="nav-link">Solar Panels</a></li>
-                                <li><a href="#module-authenticity" class="nav-link">Module Authenticity</a></li>
-                            </ul>
-                        </div>
-                        <div class="sidebar-section">
-                            <h4>Brands</h4>
-                            <div class="filter-group">
-                                ${['Knox', 'Solis', 'Anicsun', 'Canadian Solar', 'Goodwe', 'Growatt', 'Crown Solar', 'Huawei', 'Inverex', 'Tiger Solar'].map(brand => {
-                                    const isChecked = params.get('brand') && params.get('brand').split(',').includes(brand);
-                                    return `
-                                        <label style="display:flex; align-items:center; gap:8px; margin-bottom:6px; cursor:pointer;">
-                                            <input type="checkbox" class="brand-filter-chk" value="${brand}" ${isChecked ? 'checked' : ''} aria-label="${brand} Filter"> ${brand}
-                                        </label>
-                                    `;
-                                }).join('')}
+                        <div class="sidebar-section" id="ss-categories">
+                            <div class="sidebar-section-header" onclick="this.closest('.sidebar-section').classList.toggle('collapsed')">
+                                <h4>Categories</h4>
+                                <i class="fas fa-chevron-up toggle-icon"></i>
+                            </div>
+                            <div class="sidebar-section-body">
+                                <ul>
+                                    <li><a href="#products" class="nav-link active-cat">&#8250; All Products</a></li>
+                                    <li><a href="#solar-inverters" class="nav-link">Solar Inverters</a></li>
+                                    <li><a href="#lithium-batteries" class="nav-link">Lithium Batteries</a></li>
+                                    <li><a href="#vfd-inverters" class="nav-link">VFD Inverters</a></li>
+                                    <li><a href="#other-accessories" class="nav-link">Other Accessories</a></li>
+                                    <li><a href="#solar-panels" class="nav-link">Solar Panels</a></li>
+                                    <li><a href="#module-authenticity" class="nav-link">Module Authenticity</a></li>
+                                </ul>
                             </div>
                         </div>
-                        <div class="sidebar-section">
-                            <h4>Availability</h4>
-                            <div class="filter-group">
-                                <label>
-                                    <input type="checkbox" id="filterInStock" aria-label="In Stock Filter" ${inStockOnly ? 'checked' : ''}> In stock (${products.filter(p => p.availability === 'In stock' && p.id !== 'so_base').length})
-                                </label>
-                                <label>
-                                    <input type="checkbox" id="filterOutOfStock" aria-label="Out of Stock Filter" ${!inStockOnly && params.get('availability') !== null ? 'checked' : ''} disabled> Out of stock (${products.filter(p => p.availability === 'Out of stock' && p.id !== 'so_base').length})
-                                </label>
+                        <div class="sidebar-section" id="ss-brands">
+                            <div class="sidebar-section-header" onclick="this.closest('.sidebar-section').classList.toggle('collapsed')">
+                                <h4>Brands</h4>
+                                <i class="fas fa-chevron-up toggle-icon"></i>
+                            </div>
+                            <div class="sidebar-section-body">
+                                <div class="filter-group">
+                                    ${['Knox', 'Solis', 'Anicsun', 'Canadian Solar', 'Goodwe', 'Growatt', 'Crown Solar', 'Huawei', 'Inverex', 'Tiger Solar'].map(brand => {
+                                        const isChecked = params.get('brand') && params.get('brand').split(',').includes(brand);
+                                        return `<label><input type="checkbox" class="brand-filter-chk" value="${brand}" ${isChecked ? 'checked' : ''} aria-label="${brand} Filter"> ${brand}</label>`;
+                                    }).join('')}
+                                </div>
                             </div>
                         </div>
-                        <div class="sidebar-section">
-                            <h4>Price</h4>
-                            <div class="price-range">
-                                <input type="number" id="minPriceInput" aria-label="Minimum Price" value="${minPrice}" placeholder="Min">
-                                <span>to</span>
-                                <input type="number" id="maxPriceInput" aria-label="Maximum Price" value="${maxPrice}" placeholder="Max">
-                                <button class="primary" id="applyPriceFilter" aria-label="Apply Price Filter">Apply</button>
+                        <div class="sidebar-section" id="ss-availability">
+                            <div class="sidebar-section-header" onclick="this.closest('.sidebar-section').classList.toggle('collapsed')">
+                                <h4>Availability</h4>
+                                <i class="fas fa-chevron-up toggle-icon"></i>
+                            </div>
+                            <div class="sidebar-section-body">
+                                <div class="filter-group">
+                                    <label><input type="checkbox" id="filterInStock" aria-label="In Stock Filter" ${inStockOnly ? 'checked' : ''}> In Stock (${products.filter(p => p.availability === 'In stock' && p.id !== 'so_base').length})</label>
+                                    <label><input type="checkbox" id="filterOutOfStock" aria-label="Out of Stock Filter" disabled> Out of Stock (${products.filter(p => p.availability === 'Out of stock' && p.id !== 'so_base').length})</label>
+                                </div>
                             </div>
                         </div>
-                        <div class="sidebar-section">
-                            <h4>Featured Products</h4>
-                            <div class="product-grid" style="grid-template-columns: 1fr; gap: 15px;">
-                                ${products.filter(p => p.price > 200000 && p.availability === 'In stock' && p.id !== 'so_base').slice(0,3).map(productCardTemplate).join('')}
+                        <div class="sidebar-section" id="ss-price">
+                            <div class="sidebar-section-header" onclick="this.closest('.sidebar-section').classList.toggle('collapsed')">
+                                <h4>Price</h4>
+                                <i class="fas fa-chevron-up toggle-icon"></i>
+                            </div>
+                            <div class="sidebar-section-body">
+                                <div class="price-range">
+                                    <input type="number" id="minPriceInput" aria-label="Minimum Price" value="${minPrice}" placeholder="Min">
+                                    <span>to</span>
+                                    <input type="number" id="maxPriceInput" aria-label="Maximum Price" value="${maxPrice}" placeholder="Max">
+                                    <button id="applyPriceFilter" aria-label="Apply Price Filter">Apply</button>
+                                </div>
                             </div>
                         </div>
                     </aside>
@@ -2731,26 +2722,30 @@ function doExit() {
                     <div class="main-content">
                         <div class="product-controls">
                             <div class="view-as">
-                                <label>View as:</label>
-                                <button class="active" aria-label="Grid View"><i class="fas fa-th-large"></i></button>
-                                <button aria-label="List View"><i class="fas fa-list"></i></button>
+                                <span>VIEW AS</span>
+                                <button class="vc-btn active" aria-label="Grid 4 columns" title="4 columns"><i class="fas fa-th-large"></i></button>
+                                <button class="vc-btn" aria-label="Grid 3 columns" title="3 columns"><i class="fas fa-th"></i></button>
+                                <button class="vc-btn" aria-label="Grid 2 columns" title="2 columns"><i class="fas fa-table-cells-large"></i></button>
+                                <button class="vc-btn" aria-label="List View" title="List"><i class="fas fa-list"></i></button>
                             </div>
-                            <div class="items-per-page">
-                                <label for="itemsPerPage">Items per page:</label>
-                                <select id="itemsPerPage">
-                                    <option value="20" ${params.get('items_per_page') === '20' ? 'selected' : ''}>20</option>
-                                    <option value="40" ${params.get('items_per_page') === '40' ? 'selected' : ''}>40</option>
-                                    <option value="60" ${params.get('items_per_page') === '60' ? 'selected' : ''}>60</option>
-                                </select>
-                            </div>
-                            <div class="sort-by">
-                                <label for="sortBy">Sort by:</label>
-                                <select id="sortBy">
-                                    <option value="Alphabetically, A-Z" ${sortBy === 'Alphabetically, A-Z' ? 'selected' : ''}>Alphabetically, A-Z</option>
-                                    <option value="Price, low to high" ${sortBy === 'Price, low to high' ? 'selected' : ''}>Price, low to high</option>
-                                    <option value="Price, high to low" ${sortBy === 'Price, high to low' ? 'selected' : ''}>Price, high to low</option>
-                                    <option value="Best selling" ${sortBy === 'Best selling' ? 'selected' : ''}>Best selling</option>
-                                </select>
+                            <div class="pc-controls-right">
+                                <div class="items-per-page">
+                                    <label for="itemsPerPage">ITEMS PER PAGE</label>
+                                    <select id="itemsPerPage">
+                                        <option value="20" ${params.get('items_per_page') === '20' ? 'selected' : ''}>20</option>
+                                        <option value="40" ${params.get('items_per_page') === '40' ? 'selected' : ''}>40</option>
+                                        <option value="60" ${params.get('items_per_page') === '60' ? 'selected' : ''}>60</option>
+                                    </select>
+                                </div>
+                                <div class="sort-by">
+                                    <label for="sortBy">SORT BY</label>
+                                    <select id="sortBy">
+                                        <option value="Alphabetically, A-Z" ${sortBy === 'Alphabetically, A-Z' ? 'selected' : ''}>Alphabetically, A-Z</option>
+                                        <option value="Price, low to high" ${sortBy === 'Price, low to high' ? 'selected' : ''}>Price, low to high</option>
+                                        <option value="Price, high to low" ${sortBy === 'Price, high to low' ? 'selected' : ''}>Price, high to low</option>
+                                        <option value="Best selling" ${sortBy === 'Best selling' ? 'selected' : ''}>Best selling</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
 
