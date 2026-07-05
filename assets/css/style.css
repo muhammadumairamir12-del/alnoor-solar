@@ -312,33 +312,67 @@ header .container.navbar {
 
 .nav-item.dropdown .dropdown-content {
     position: absolute;
-    background-color: var(--white);
-    min-width: 220px;
-    box-shadow: var(--shadow-lg);
-    z-index: 100;
-    padding: 12px 0;
-    border-radius: var(--radius-md);
-    top: 100%;
+    background-color: #fff;
+    min-width: 200px;
+    box-shadow: 0 12px 40px rgba(7, 30, 74, 0.14);
+    z-index: 1000;
+    padding: 8px 0;
+    border-radius: 10px;
+    top: calc(100% + 8px);
     left: 50%;
-    transform: translateX(-50%) translateY(10px);
-    border: 1px solid var(--border-color);
+    transform: translateX(-50%) translateY(8px) scale(0.97);
+    border: 1px solid #eee;
     opacity: 0;
     pointer-events: none;
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+    transition: transform 0.28s cubic-bezier(0.23, 1, 0.32, 1),
+                opacity 0.22s ease;
+    transform-origin: top center;
+}
+
+/* Small arrow tip */
+.nav-item.dropdown .dropdown-content::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 12px;
+    height: 12px;
+    background: #fff;
+    border-left: 1px solid #eee;
+    border-top: 1px solid #eee;
+    rotate: 45deg;
 }
 
 .nav-item.dropdown:hover .dropdown-content {
     opacity: 1;
     pointer-events: auto;
-    transform: translateX(-50%) translateY(0);
+    transform: translateX(-50%) translateY(0) scale(1);
 }
 
 .nav-item.dropdown .dropdown-content a {
-    color: var(--text-dark);
-    padding: 10px 20px;
-    display: block;
+    color: #333;
+    padding: 9px 18px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
     font-weight: 500;
-    font-size: 0.9rem;
+    font-size: 0.88rem;
+    transition: background 0.15s, color 0.15s, padding-left 0.15s;
+    position: relative;
+}
+
+.nav-item.dropdown .dropdown-content a::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--primary);
+    border-radius: 0 3px 3px 0;
+    transform: scaleY(0);
+    transition: transform 0.15s;
 }
 
 .nav-item.dropdown .dropdown-content a::after {
@@ -346,9 +380,81 @@ header .container.navbar {
 }
 
 .nav-item.dropdown .dropdown-content a:hover {
-    background-color: var(--primary-light);
+    background-color: #EEF2FF;
     color: var(--primary);
-    padding-left: 25px;
+    padding-left: 24px;
+}
+
+.nav-item.dropdown .dropdown-content a:hover::before {
+    transform: scaleY(1);
+}
+
+/* ===== MEGA DROPDOWN (All Products) ===== */
+.mega-dropdown {
+    min-width: 480px !important;
+    padding: 0 !important;
+    left: -80px !important;
+    transform: translateX(0) translateY(8px) scale(0.97) !important;
+    display: flex !important;
+    gap: 0 !important;
+    overflow: hidden !important;
+}
+
+.nav-item.dropdown:hover .mega-dropdown {
+    transform: translateX(0) translateY(0) scale(1) !important;
+}
+
+.mega-dropdown::before {
+    left: 120px !important;
+}
+
+.mega-col {
+    flex: 1;
+    padding: 16px 0;
+    min-width: 0;
+}
+
+.mega-col:first-child {
+    border-right: 1px solid #f0f0f0;
+}
+
+.mega-col-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: #aaa;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    padding: 4px 18px 10px;
+}
+
+.mega-brands-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+    padding: 0 12px;
+}
+
+.mega-brand {
+    padding: 7px 10px !important;
+    background: #f5f7ff !important;
+    border-radius: 6px !important;
+    font-size: 0.78rem !important;
+    font-weight: 600 !important;
+    color: #555 !important;
+    text-align: center !important;
+    justify-content: center !important;
+    transition: background 0.15s, color 0.15s !important;
+    border: 1px solid transparent !important;
+}
+
+.mega-brand::before {
+    display: none !important;
+}
+
+.mega-brand:hover {
+    background: var(--primary) !important;
+    color: #fff !important;
+    padding-left: 10px !important;
 }
 
 /* Search and Cart */
@@ -415,36 +521,62 @@ header .container.navbar {
 }
 
 /* Hamburger for Mobile */
+/* ===== UPGRADED HAMBURGER ANIMATION ===== */
 .hamburger-btn {
     display: none;
     flex-direction: column;
     justify-content: space-between;
-    width: 28px;
-    height: 20px;
+    width: 30px;
+    height: 22px;
     background: transparent;
     border: none;
     padding: 0;
     z-index: 1001;
+    cursor: pointer;
+    outline: none;
+    position: relative;
 }
 
 .hamburger-btn span {
+    display: block;
     width: 100%;
-    height: 3px;
+    height: 2.5px;
     background-color: var(--bg-dark);
-    border-radius: var(--radius-sm);
-    transition: var(--transition);
+    border-radius: 4px;
+    transition: transform 0.38s cubic-bezier(0.23, 1, 0.32, 1),
+                opacity   0.28s ease,
+                width     0.28s ease;
+    transform-origin: center;
 }
 
+/* Middle bar shortens before rotating */
+.hamburger-btn span:nth-child(2) {
+    width: 70%;
+    transition: transform 0.38s cubic-bezier(0.23, 1, 0.32, 1),
+                opacity   0.2s ease,
+                width     0.25s ease;
+}
+
+/* On hover, middle bar widens back */
+.hamburger-btn:hover span:nth-child(2) {
+    width: 100%;
+}
+
+/* Open state — morph into X */
 .hamburger-btn.open span:nth-child(1) {
-    transform: translateY(8px) rotate(45deg);
+    transform: translateY(9.5px) rotate(45deg);
+    width: 100%;
 }
 
 .hamburger-btn.open span:nth-child(2) {
     opacity: 0;
+    width: 0;
+    transform: scaleX(0);
 }
 
 .hamburger-btn.open span:nth-child(3) {
-    transform: translateY(-9px) rotate(-45deg);
+    transform: translateY(-9.5px) rotate(-45deg);
+    width: 100%;
 }
 
 .hdr-icons {
@@ -3571,21 +3703,29 @@ footer {
         flex-wrap: wrap !important;
     }
 
-    /* Mobile Slide Panel & overlays */
+    /* Ensure main header is always on top on mobile, even above the navigation slide menu overlay */
+    header {
+        z-index: 10005 !important;
+        position: sticky !important;
+        top: 0 !important;
+    }
+
+    /* Mobile Slide Panel & overlays starting below header */
     .mobile-nav-panel {
         display: flex !important;
         position: fixed !important;
-        top: 0 !important;
+        top: var(--header-height) !important;
         left: 0 !important;
         width: 300px !important;
-        height: 100vh !important;
+        height: calc(100vh - var(--header-height)) !important;
         background-color: var(--white) !important;
         z-index: 10000 !important;
         transform: translateX(-100%) !important;
-        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
-        box-shadow: 4px 0 24px rgba(0, 0, 0, 0.15) !important;
+        transition: transform 0.42s cubic-bezier(0.23, 1, 0.32, 1) !important;
+        box-shadow: 6px 0 32px rgba(7, 30, 74, 0.2) !important;
         flex-direction: column !important;
         padding: 0 !important;
+        will-change: transform;
     }
 
     .mobile-nav-panel.open {
@@ -3595,10 +3735,10 @@ footer {
     .mob-overlay {
         display: block !important;
         position: fixed !important;
-        top: 0 !important;
+        top: var(--header-height) !important;
         left: 0 !important;
         width: 100% !important;
-        height: 100vh !important;
+        height: calc(100vh - var(--header-height)) !important;
         background-color: rgba(7, 30, 74, 0.5) !important;
         backdrop-filter: blur(4px) !important;
         z-index: 9999 !important;
@@ -3612,79 +3752,166 @@ footer {
         pointer-events: auto !important;
     }
 
-    /* Panel elements */
+    /* Hide the redundant close header inside the menu panel since main header is always on top */
     .mnp-header {
-        display: flex !important;
-        justify-content: space-between !important;
-        align-items: center !important;
-        padding: 20px 24px !important;
-        border-bottom: 1px solid var(--border-color) !important;
+        display: none !important;
     }
 
     .mnp-logo {
-        display: flex !important;
+        display: none !important;
         align-items: center !important;
-        gap: 10px !important;
+        gap: 12px !important;
         font-weight: 700 !important;
-        color: var(--bg-dark) !important;
+        color: #fff !important;
+        font-size: 1rem !important;
     }
 
     .mnp-logo img {
-        height: 36px !important;
-        width: 36px !important;
+        height: 38px !important;
+        width: 38px !important;
         object-fit: contain !important;
+        border-radius: 8px !important;
+        background: rgba(255,255,255,0.15) !important;
+        padding: 4px !important;
     }
 
     .mnp-close {
-        background: none !important;
+        background: rgba(255,255,255,0.15) !important;
         border: none !important;
-        font-size: 1.5rem !important;
-        color: var(--text-muted) !important;
-        padding: 4px !important;
+        font-size: 1.1rem !important;
+        color: #fff !important;
+        padding: 6px 10px !important;
         cursor: pointer !important;
+        border-radius: 6px !important;
+        transition: background 0.2s !important;
+        line-height: 1 !important;
+    }
+
+    .mnp-close:hover {
+        background: rgba(255,255,255,0.28) !important;
     }
 
     .mnp-links {
         display: flex !important;
         flex-direction: column !important;
-        padding: 24px !important;
-        gap: 8px !important;
+        padding: 16px 12px !important;
+        gap: 4px !important;
         overflow-y: auto !important;
         flex: 1 !important;
+    }
+
+    /* Stagger slide-in for each nav link */
+    @keyframes mnpLinkIn {
+        from { opacity: 0; transform: translateX(-18px); }
+        to   { opacity: 1; transform: translateX(0); }
+    }
+
+    .mobile-nav-panel.open .mnp-link {
+        animation: mnpLinkIn 0.35s cubic-bezier(0.23, 1, 0.32, 1) both !important;
+    }
+
+    .mobile-nav-panel.open .mnp-link:nth-child(1) { animation-delay: 0.05s !important; }
+    .mobile-nav-panel.open .mnp-link:nth-child(2) { animation-delay: 0.10s !important; }
+    .mobile-nav-panel.open .mnp-link:nth-child(3) { animation-delay: 0.15s !important; }
+    .mobile-nav-panel.open .mnp-link:nth-child(4) { animation-delay: 0.20s !important; }
+    .mobile-nav-panel.open .mnp-link:nth-child(5) { animation-delay: 0.25s !important; }
+    .mobile-nav-panel.open .mnp-link:nth-child(6) { animation-delay: 0.28s !important; }
+    .mobile-nav-panel.open .mnp-link:nth-child(7) { animation-delay: 0.31s !important; }
+    .mobile-nav-panel.open .mnp-link:nth-child(8) { animation-delay: 0.34s !important; }
+    .mobile-nav-panel.open .mnp-link:nth-child(9) { animation-delay: 0.37s !important; }
+
+    .mnp-section-label {
+        font-size: 0.68rem !important;
+        font-weight: 700 !important;
+        color: #aaa !important;
+        text-transform: uppercase !important;
+        letter-spacing: 1.2px !important;
+        padding: 12px 14px 4px !important;
     }
 
     .mnp-link {
         display: flex !important;
         align-items: center !important;
         gap: 12px !important;
-        padding: 12px 16px !important;
-        border-radius: var(--radius-sm) !important;
-        color: var(--text-dark) !important;
+        padding: 11px 14px !important;
+        border-radius: 8px !important;
+        color: #333 !important;
         font-weight: 600 !important;
-        font-size: 1rem !important;
-        transition: var(--transition) !important;
+        font-size: 0.95rem !important;
+        transition: background 0.18s, color 0.18s, transform 0.18s !important;
+        position: relative !important;
+        overflow: hidden !important;
     }
 
-    .mnp-link:hover {
-        background-color: var(--primary-light) !important;
+    .mnp-link::before {
+        content: '' !important;
+        position: absolute !important;
+        left: 0; top: 0; bottom: 0 !important;
+        width: 3px !important;
+        background: var(--primary) !important;
+        border-radius: 0 3px 3px 0 !important;
+        transform: scaleY(0) !important;
+        transition: transform 0.2s !important;
+    }
+
+    .mnp-link:hover, .mnp-link.active {
+        background-color: #EEF2FF !important;
         color: var(--primary) !important;
-        transform: translateX(4px) !important;
+        transform: translateX(3px) !important;
+    }
+
+    .mnp-link:hover::before, .mnp-link.active::before {
+        transform: scaleY(1) !important;
     }
 
     .mnp-icon {
-        font-size: 1.2rem !important;
+        font-size: 1.15rem !important;
+        width: 22px !important;
+        text-align: center !important;
+        flex-shrink: 0 !important;
+    }
+
+    .mnp-brands-grid {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 6px !important;
+        padding: 4px 0 !important;
+    }
+
+    .mnp-brand-btn {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 8px 6px !important;
+        border-radius: 6px !important;
+        background: #f5f5f5 !important;
+        border: 1px solid #eee !important;
+        font-size: 0.78rem !important;
+        font-weight: 600 !important;
+        color: #444 !important;
+        cursor: pointer !important;
+        transition: background 0.18s, color 0.18s, border-color 0.18s !important;
+        text-align: center !important;
+        line-height: 1.2 !important;
+    }
+
+    .mnp-brand-btn:hover {
+        background: var(--primary) !important;
+        color: #fff !important;
+        border-color: var(--primary) !important;
     }
 
     .mnp-footer {
-        padding: 24px !important;
-        border-top: 1px solid var(--border-color) !important;
-        background-color: var(--light-gray) !important;
+        padding: 18px 20px !important;
+        border-top: 1px solid #eee !important;
+        background-color: #fafafa !important;
+        flex-shrink: 0 !important;
     }
 
     .mnp-contact-row {
-        font-size: 0.85rem !important;
-        color: var(--text-muted) !important;
-        margin-bottom: 8px !important;
+        font-size: 0.82rem !important;
+        color: #888 !important;
+        margin-bottom: 6px !important;
     }
 
     .mnp-contact-row a {
