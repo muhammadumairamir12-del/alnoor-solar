@@ -670,8 +670,7 @@ header .container.navbar {
 
 .hero-carousel img.active {
     opacity: 0.15; /* Soft background backplate opacity */
-    transform: translate3d(0, 0, 0) scale(1);
-    animation: slowZoom 6s ease-out forwards;
+    transform: translate3d(0, 0, 0);
 }
 
 .hero-carousel img.exit {
@@ -753,48 +752,8 @@ header .container.navbar {
 }
 
 .hero-btns button {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 15px 30px;
-    font-size: 0.95rem;
-    font-weight: 700;
-    border-radius: var(--radius-sm);
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    overflow: hidden;
-}
-
-.hero-btns button.primary {
-    background: linear-gradient(135deg, #1565C0, #0D47A1);
-    color: white;
-    border: none;
-    box-shadow: 0 4px 18px rgba(21,101,192,0.3);
-}
-
-.hero-btns button.primary:hover {
-    transform: translate3d(0, -4px, 0);
-    box-shadow: 0 8px 25px rgba(21, 101, 192, 0.5), 0 0 15px rgba(33, 150, 243, 0.3);
-    background: linear-gradient(135deg, #1976D2, #1565C0);
-}
-
-.hero-btns button.primary:hover i {
-    transform: translate3d(4px, 0, 0);
-}
-
-.hero-btns button.secondary {
-    background: rgba(255, 255, 255, 0.08);
-    color: white;
-    border: 1.5px solid rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(10px);
-}
-
-.hero-btns button.secondary:hover {
-    transform: translate3d(0, -4px, 0);
-    background: rgba(255, 255, 255, 0.15);
-    border-color: rgba(255, 255, 255, 0.9);
-    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.15);
+    padding: 14px 32px;
+    font-size: 1rem;
 }
 
 /* Experience & Trust Badges */
@@ -872,35 +831,8 @@ header .container.navbar {
 }
 
 @keyframes floatPanel {
-    0% { transform: rotateX(40deg) rotateY(-20deg) rotateZ(10deg) translate3d(0, 0, 0); }
-    100% { transform: rotateX(38deg) rotateY(-18deg) rotateZ(8deg) translate3d(0, -25px, 0); }
-}
-
-@keyframes floatPanelSecondary {
-    0% { transform: rotateX(30deg) rotateY(15deg) rotateZ(-5deg) translate3d(0, 0, 0); }
-    100% { transform: rotateX(28deg) rotateY(17deg) rotateZ(-3deg) translate3d(0, -20px, 0); }
-}
-
-@keyframes bounceIcon {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(-8px); }
-}
-
-@keyframes pulseGlow {
-    0% { transform: scale(1); opacity: 0.6; box-shadow: 0 0 0 0 rgba(0, 230, 118, 0.4); }
-    70% { transform: scale(1.1); opacity: 1; box-shadow: 0 0 0 10px rgba(0, 230, 118, 0); }
-    100% { transform: scale(1); opacity: 0.6; box-shadow: 0 0 0 0 rgba(0, 230, 118, 0); }
-}
-
-@keyframes driftSun {
-    0% { transform: translate3d(0, 0, 0) scale(1); }
-    50% { transform: translate3d(20px, -15px, 0) scale(1.1); }
-    100% { transform: translate3d(-10px, 10px, 0) scale(0.95); }
-}
-
-@keyframes slowZoom {
-    0% { transform: translate3d(0, 0, 0) scale(1); }
-    100% { transform: translate3d(0, 0, 0) scale(1.12); }
+    0% { transform: rotateX(40deg) rotateY(-20deg) rotateZ(10deg) translateY(0); }
+    100% { transform: rotateX(38deg) rotateY(-18deg) rotateZ(8deg) translateY(-25px); }
 }
 
 /* Scroll Down Indicator */
@@ -1036,33 +968,20 @@ header .container.navbar {
    BRANDS SECTION
    ========================================================================== */
 .brands-we-love {
-    background: radial-gradient(circle at center, #ffffff 0%, #f6f9fc 100%);
-    padding: 70px 0;
-    border-top: 1px solid rgba(0,0,0,0.04);
-    border-bottom: 1px solid rgba(0,0,0,0.04);
+    background-color: var(--light-gray);
+    padding: 50px 0;
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
     overflow: hidden;
-    position: relative;
 }
 
-.brands-we-love h2 {
+.brand-carousel-title {
     text-align: center;
-    font-size: 2.1rem;
-    font-weight: 800;
-    color: #0A1D37;
-    margin-bottom: 8px;
-    letter-spacing: -0.5px;
-    font-family: sans-serif;
-}
-
-.brands-we-love .brands-subtitle {
-    text-align: center;
-    font-size: 1.02rem;
+    margin-bottom: 30px;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
     color: var(--text-muted);
-    max-width: 600px;
-    margin: 0 auto 40px;
-    line-height: 1.5;
-    font-family: sans-serif;
-    font-weight: 500;
 }
 
 .brands-marquee-wrap, .logo-slider {
@@ -1081,102 +1000,27 @@ header .container.navbar {
     transform: translateZ(0);
 }
 
-/* Brands Section Card Wrapper */
-.brand-logo {
-    position: relative;
+.brands-marquee-track a, .logo-track a {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: white;
-    border: 1.5px solid rgba(0,0,0,0.06);
-    border-radius: 10px;
-    padding: 10px 20px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.02);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    width: 170px;
-    height: 75px;
-    margin: 8px;
-    box-sizing: border-box;
-    flex-shrink: 0;
+    flex: 0 0 auto;
 }
 
-.brand-logo img {
-    height: 100% !important;
-    width: 100% !important;
-    object-fit: contain !important;
-    filter: grayscale(90%);
-    opacity: 0.7;
-    transition: all 0.3s ease;
+.brands-marquee-track img, .logo-track img {
+    height: 40px;
+    max-width: 140px;
+    object-fit: contain;
+    filter: grayscale(100%);
+    opacity: 0.6;
+    transition: var(--transition);
     backface-visibility: hidden;
 }
 
-/* Hover State */
-.brand-logo:hover {
-    transform: translate3d(0, -5px, 0) scale(1.04);
-    box-shadow: 0 10px 24px rgba(7,30,74,0.07), 0 0 15px rgba(21,101,192,0.04);
-    border-color: rgba(21,101,192,0.25);
-    z-index: 10;
-}
-
-.brand-logo:hover img {
+.brands-marquee-track img:hover, .logo-track img:hover {
     filter: grayscale(0%);
     opacity: 1;
-}
-
-/* Tooltip Styles */
-.brand-tooltip {
-    position: absolute;
-    bottom: calc(100% + 14px);
-    left: 50%;
-    transform: translate3d(-50%, 10px, 0);
-    background: #0A1D37;
-    color: white;
-    padding: 9px 12px;
-    border-radius: 8px;
-    font-size: 0.72rem;
-    line-height: 1.4;
-    white-space: nowrap;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.22);
-    border: 1px solid rgba(255,255,255,0.15);
-    z-index: 20;
-    pointer-events: none;
-    text-align: center;
-}
-
-.brand-tooltip strong {
-    display: block;
-    color: #ffb800;
-    font-size: 0.76rem;
-    margin-bottom: 2px;
-    font-family: sans-serif;
-    font-weight: 800;
-}
-
-.brand-tooltip span {
-    font-family: sans-serif;
-    font-weight: 500;
-    color: #eee;
-}
-
-/* Tooltip Arrow */
-.brand-tooltip::after {
-    content: '';
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    border-width: 5px;
-    border-style: solid;
-    border-color: #0A1D37 transparent transparent transparent;
-}
-
-.brand-logo:hover .brand-tooltip {
-    opacity: 1;
-    visibility: visible;
-    transform: translate3d(-50%, 0, 0);
+    transform: scale(1.08) translate3d(0,0,0);
 }
 
 @keyframes infiniteScroll {
