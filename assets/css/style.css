@@ -992,7 +992,7 @@ header .container.navbar {
 .brands-marquee-track, .logo-track {
     display: flex;
     width: 200%;
-    animation: infiniteScroll 55s linear infinite;
+    animation: infiniteScroll 90s linear infinite;
     align-items: center;
     justify-content: space-around;
     backface-visibility: hidden;
