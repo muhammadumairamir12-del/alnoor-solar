@@ -662,18 +662,20 @@ header .container.navbar {
     height: 100%;
     object-fit: cover;
     opacity: 0;
-    transform: translateX(-100%);
+    transform: translate3d(-100%, 0, 0);
     transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1), opacity 1.2s ease-in-out;
+    backface-visibility: hidden;
+    perspective: 1000px;
 }
 
 .hero-carousel img.active {
     opacity: 0.15; /* Soft background backplate opacity */
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0);
 }
 
 .hero-carousel img.exit {
     opacity: 0;
-    transform: translateX(100%);
+    transform: translate3d(100%, 0, 0);
 }
 
 /* Sunlight Ray Animation */
@@ -993,6 +995,9 @@ header .container.navbar {
     animation: infiniteScroll 25s linear infinite;
     align-items: center;
     justify-content: space-around;
+    backface-visibility: hidden;
+    perspective: 1000px;
+    transform: translateZ(0);
 }
 
 .brands-marquee-track a, .logo-track a {
@@ -1009,17 +1014,18 @@ header .container.navbar {
     filter: grayscale(100%);
     opacity: 0.6;
     transition: var(--transition);
+    backface-visibility: hidden;
 }
 
 .brands-marquee-track img:hover, .logo-track img:hover {
     filter: grayscale(0%);
     opacity: 1;
-    transform: scale(1.08);
+    transform: scale(1.08) translate3d(0,0,0);
 }
 
 @keyframes infiniteScroll {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
+    0% { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(-50%, 0, 0); }
 }
 
 /* ==========================================================================
