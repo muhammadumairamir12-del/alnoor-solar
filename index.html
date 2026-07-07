@@ -82,8 +82,50 @@
     <!-- Theme Color for Mobile Browsers -->
     <meta name="theme-color" content="#071E4A">
     <meta name="msapplication-TileColor" content="#071E4A">
-</head>
 <body style="overflow-x: hidden;">
+
+<!-- Fullscreen Preloader -->
+<div id="preloader" style="
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #071E4A;
+    z-index: 999999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+">
+    <div style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+        <div style="position: relative; margin-bottom: 20px;">
+            <img src="favicon.png" alt="Al Noor Solar Logo" style="width: 100px; height: 100px; animation: pulse 1.8s infinite ease-in-out; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); background-color: white; padding: 10px;">
+        </div>
+        <div style="font-family: 'Montserrat', 'Segoe UI', sans-serif; font-size: 2.2rem; font-weight: 800; color: #ffffff; letter-spacing: 1px;">
+            AL Noor
+        </div>
+        <div style="font-family: 'Montserrat', 'Segoe UI', sans-serif; font-size: 0.95rem; color: #4DA3FF; text-transform: uppercase; letter-spacing: 5px; margin-top: 5px; font-weight: 700;">
+            Solar Energy
+        </div>
+        <div style="margin-top: 30px; width: 140px; height: 4px; background: rgba(255,255,255,0.1); border-radius: 10px; overflow: hidden; position: relative;">
+            <div style="width: 30%; height: 100%; background: linear-gradient(90deg, #4DA3FF, #00d97e); border-radius: 10px; position: absolute; left: 0; animation: loading-bar 1.5s infinite ease-in-out;"></div>
+        </div>
+    </div>
+</div>
+
+<style>
+@keyframes pulse {
+    0%, 100% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(77,163,255,0.4)); }
+    50% { transform: scale(1.06); filter: drop-shadow(0 0 25px rgba(77,163,255,0.8)); }
+}
+@keyframes loading-bar {
+    0% { left: -30%; width: 30%; }
+    50% { left: 30%; width: 40%; }
+    100% { left: 100%; width: 30%; }
+}
+</style>
 
 <div id="app-wrapper">
 
@@ -766,28 +808,39 @@
             <!-- Right: Info -->
             <div class="pdp-info-col">
                 <div class="pd-vendor" id="pdVendor" style="color: var(--primary); font-weight: 600; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; margin-bottom: 8px;"></div>
-                <h1 class="pd-name" id="pdName" style="font-size: clamp(1.5rem, 3vw, 2rem); color: var(--bg-dark); font-weight: 700; margin-bottom: 15px; line-height: 1.2;"></h1>
+                <h1 class="pd-name" id="pdName" style="font-size: clamp(1.5rem, 3vw, 2.2rem); color: var(--bg-dark); font-weight: 700; margin-bottom: 10px; line-height: 1.2;"></h1>
                 
-                <div class="pdp-rating-row" style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px; cursor: pointer;" onclick="document.getElementById('tab-reviews').click(); document.getElementById('pdp-tabs').scrollIntoView({behavior: 'smooth'})">
-                    <div class="stars" id="pdAvgStars" style="color: #ffc107; font-size: 1.1rem;">
-                        <i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+                <!-- dynamic sales counter -->
+                <div style="display: flex; align-items: center; gap: 8px; color: #d32f2f; font-size: 0.95rem; font-weight: 600; margin-bottom: 15px;">
+                    <i class="fas fa-fire"></i> <span id="pdSoldText">5 sold in last 18 hours</span>
+                </div>
+
+                <!-- specs excerpt -->
+                <div style="font-size: 0.92rem; color: #555; line-height: 1.6; margin-bottom: 20px; font-family: sans-serif;" id="pdSpecsExcerpt"></div>
+
+                <!-- specs metadata -->
+                <div style="margin-bottom: 20px; font-size: 0.95rem; border-top: 1px solid #eee; border-bottom: 1px solid #eee; padding: 15px 0; display: flex; flex-direction: column; gap: 8px; font-family: sans-serif;">
+                    <div><span style="color: #666; width: 120px; display: inline-block;">Vendor:</span> <span id="pdDetailsVendor" style="font-weight: 600; color: #111;"></span></div>
+                    <div><span style="color: #666; width: 120px; display: inline-block;">Availability:</span> <span id="pdDetailsAvailability" style="font-weight: 600; color: #111;"></span></div>
+                    <div><span style="color: #666; width: 120px; display: inline-block;">Product type:</span> <span id="pdDetailsType" style="font-weight: 600; color: #111;"></span></div>
+                </div>
+                
+                <!-- Price info -->
+                <div style="display: flex; align-items: baseline; gap: 15px; margin-bottom: 20px;">
+                    <span id="pdPrice" style="font-size: clamp(2rem, 4vw, 2.5rem); font-weight: 800; color: #111;"></span>
+                    <span id="pdOld" style="font-size: 1.4rem; color: var(--text-muted); text-decoration: line-through;"></span>
+                </div>
+
+                <!-- dynamic urgency progress bar -->
+                <div id="pdHurryContainer" style="margin-bottom: 25px;">
+                    <div style="color: #d32f2f; font-weight: 700; font-size: 0.92rem; margin-bottom: 8px;" id="pdHurryText">Please hurry! Only 5 left in stock</div>
+                    <div style="width: 100%; height: 6px; background-color: #f1f1f1; border-radius: 10px; overflow: hidden; position: relative;">
+                        <div id="pdHurryProgress" style="width: 35%; height: 100%; background: linear-gradient(90deg, #d32f2f, #ff9800); border-radius: 10px; transition: width 0.8s ease-in-out;"></div>
                     </div>
-                    <span id="pdReviewCount" style="color: var(--text-muted); font-size: 0.9rem;">(0 Reviews)</span>
                 </div>
                 
-                <div class="pd-prices" style="display: flex; align-items: baseline; gap: 15px; margin-bottom: 25px; padding-bottom: 25px; border-bottom: 1px solid var(--border-color);">
-                    <span class="pd-price" id="pdPrice" style="font-size: clamp(1.8rem, 3.5vw, 2.2rem); font-weight: 800; color: var(--primary);"></span>
-                    <span class="pd-old" id="pdOld" style="font-size: 1.3rem; color: var(--text-muted); text-decoration: line-through;"></span>
-                </div>
-                
-                <div class="pdp-availability" style="margin-bottom: 20px; font-weight: 600;">
-                    Availability: <span id="pdAvailability" style="color: #2e7d32;"><i class="fas fa-check-circle"></i> In Stock</span>
-                </div>
-                
-                <div class="pd-desc" id="pdDesc" style="font-size: 1.05rem; color: var(--text-dark); line-height: 1.7; margin-bottom: 30px;"></div>
-                
-                <div class="pdp-actions" style="background: var(--light-gray); padding: 25px; border-radius: var(--radius-md); margin-bottom: 30px;">
-                    <div class="pd-qty-row" style="margin-bottom: 20px; display: flex; align-items: center; gap: 15px;">
+                <div class="pdp-actions" style="background: #fcfcfc; border: 1px solid #f0f0f0; padding: 25px; border-radius: var(--radius-md); margin-bottom: 25px;">
+                    <div class="pd-qty-row" style="margin-bottom: 12px; display: flex; align-items: center; gap: 15px;">
                         <label style="font-weight: 600; color: var(--bg-dark);">Quantity:</label>
                         <div class="pd-qty-ctrl" style="display: flex; background: white; border: 1px solid var(--border-color); border-radius: var(--radius-sm); overflow: hidden; width: fit-content;">
                             <button class="pd-qty-btn" aria-label="Decrease Quantity" onclick="changeDetailQty(-1)" style="width: 44px; height: 44px; border: none; background: none; font-size: 1.2rem; cursor: pointer; color: var(--bg-dark);">−</button>
@@ -796,50 +849,71 @@
                         </div>
                     </div>
                     
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-                        <button id="pdAddBtn" class="pd-add-btn" onclick="addDetailToCart()" style="padding: 16px; font-size: 1.05rem; font-weight: 600; border-radius: var(--radius-sm); cursor: pointer; background: white; color: var(--primary); border: 2px solid var(--primary); transition: var(--transition); display: flex; align-items: center; justify-content: center; gap: 10px;">
-                            <i class="fas fa-cart-plus"></i> Add to Cart
+                    <!-- Subtotal Display -->
+                    <div style="font-size: 1rem; color: #444; font-weight: 600; margin-bottom: 20px;">
+                        Subtotal: <span id="pdSubtotal" style="color: #111; font-weight: 800; font-size: 1.15rem;"></span>
+                    </div>
+                    
+                    <div style="display: flex; gap: 12px; align-items: center; margin-bottom: 12px;">
+                        <button id="pdAddBtn" class="pd-add-btn" onclick="addDetailToCart()" style="flex: 1; padding: 18px; font-size: 1.05rem; font-weight: 700; border-radius: var(--radius-sm); cursor: pointer; background: #1a1a1a; color: white; border: none; transition: var(--transition); text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                            ADD TO CART
                         </button>
-                        <button id="pdBuyBtn" class="pd-buy-btn" onclick="buyNow()" style="padding: 16px; font-size: 1.05rem; font-weight: 600; border-radius: var(--radius-sm); cursor: pointer; background: var(--primary); color: white; border: 2px solid var(--primary); transition: var(--transition); display: flex; align-items: center; justify-content: center; gap: 10px;">
-                            <i class="fas fa-bolt"></i> Buy Now
+                        <!-- share button next to it -->
+                        <button onclick="shareProduct('copy')" style="width: 56px; height: 56px; display: flex; align-items: center; justify-content: center; background: white; border: 1px solid #ddd; border-radius: var(--radius-sm); cursor: pointer; color: #555; font-size: 1.15rem; transition: var(--transition);" aria-label="Share product" title="Copy Link">
+                            <i class="fas fa-share-alt"></i>
                         </button>
                     </div>
+
+                    <!-- ORDER ON WHATSAPP -->
+                    <button id="pdWhatsAppBtn" class="pd-whatsapp-btn" onclick="orderOnWhatsAppDetail()" style="width: 100%; padding: 18px; font-size: 1.05rem; font-weight: 700; border-radius: var(--radius-sm); cursor: pointer; background: #00E676; color: white; border: none; transition: var(--transition); display: flex; align-items: center; justify-content: center; gap: 10px; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 4px 15px rgba(0,230,118,0.25);">
+                        <i class="fab fa-whatsapp" style="font-size: 1.4rem;"></i> ORDER ON WHATSAPP
+                    </button>
                 </div>
                 
-                <div class="pdp-meta-links" style="display: flex; flex-direction: column; gap: 15px;">
-                    <a id="pdDatasheetBtn" href="#" target="_blank" class="pd-datasheet-btn" style="display: none; align-items: center; gap: 10px; color: var(--text-dark); text-decoration: none; font-weight: 500; padding: 12px 0;">
-                        <i class="fas fa-file-pdf" style="color: #e53935; font-size: 1.2rem;"></i> Download Technical Datasheet
-                    </a>
-                    
-                    <div class="pd-share-row" style="display: flex; align-items: center; gap: 10px; color: var(--text-dark); font-weight: 500;">
-                        <i class="fas fa-share-alt" style="color:var(--primary)"></i>
-                        <span>Share: </span>
-                        <div style="display: flex; gap: 15px; font-size: 1.2rem;">
-                            <a href="#" onclick="shareProduct('wa'); return false;" style="color: #25D366;" aria-label="Share on WhatsApp"><i class="fab fa-whatsapp"></i></a>
-                            <a href="#" onclick="shareProduct('fb'); return false;" style="color: #1877F2;" aria-label="Share on Facebook"><i class="fab fa-facebook"></i></a>
-                            <a href="#" onclick="shareProduct('copy'); return false;" style="color: var(--text-muted);" title="Copy Link" aria-label="Copy Link"><i class="fas fa-link"></i></a>
+                <!-- viewers count -->
+                <div style="display: flex; align-items: center; gap: 8px; color: #777; font-size: 0.88rem; margin-bottom: 25px; font-family: sans-serif;">
+                    <i class="far fa-eye" style="font-size: 1rem;"></i> <span id="pdViewersText">14 customers are viewing this product</span>
+                </div>
+
+                <!-- Policies Info Box -->
+                <div style="display: flex; flex-direction: column; gap: 15px; padding-top: 25px; border-top: 1px solid #eee; font-family: sans-serif;">
+                    <div style="display: flex; align-items: flex-start; gap: 15px;">
+                        <span style="font-size: 1.3rem; color: #333; margin-top: 2px;"><i class="fas fa-shipping-fast"></i></span>
+                        <div>
+                            <div style="font-weight: 700; color: #111; font-size: 0.92rem; margin-bottom: 2px;">Shipping</div>
+                            <div style="font-size: 0.82rem; color: #666; line-height: 1.4;">You have to pay Partial Payment for order confirmation</div>
                         </div>
                     </div>
-                </div>
-                
-                <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--border-color); display: flex; align-items: center; gap: 15px;">
-                    <i class="fas fa-shield-alt" style="font-size: 2rem; color: var(--primary);"></i>
-                    <div>
-                        <div style="font-weight: 600; color: var(--bg-dark);">Official Warranty</div>
-                        <div style="font-size: 0.9rem; color: var(--text-muted);">100% Genuine Product Guaranteed</div>
+                    <div style="display: flex; align-items: flex-start; gap: 15px;">
+                        <span style="font-size: 1.3rem; color: #333; margin-top: 2px;"><i class="fas fa-clock"></i></span>
+                        <div>
+                            <div style="font-weight: 700; color: #111; font-size: 0.92rem; margin-bottom: 2px;">Estimated Shipping Time: 24 to 72 Hours</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 15px;">
+                        <span style="font-size: 1.3rem; color: #333; margin-top: 2px;"><i class="fas fa-check-circle"></i></span>
+                        <div>
+                            <div style="font-weight: 700; color: #111; font-size: 0.92rem; margin-bottom: 2px;">100% Original & Official Product</div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         
         <!-- Tabs Section -->
-        <div id="pdp-tabs" class="pdp-tabs-container" style="margin-top: 60px;">
-            <div class="pdp-tabs-header" style="display: flex; border-bottom: 2px solid var(--border-color); gap: 30px; margin-bottom: 30px; overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch;">
-                <button class="pdp-tab-btn active" id="tab-desc" onclick="switchPdpTab('desc')" style="background: none; border: none; padding: 15px 5px; font-size: 1.1rem; font-weight: 600; color: var(--primary); cursor: pointer; border-bottom: 3px solid var(--primary); margin-bottom: -2px; white-space: nowrap;">Description</button>
-                <button class="pdp-tab-btn" id="tab-reviews" onclick="switchPdpTab('reviews')" style="background: none; border: none; padding: 15px 5px; font-size: 1.1rem; font-weight: 600; color: var(--text-muted); cursor: pointer; margin-bottom: -2px; white-space: nowrap;">Reviews (<span id="tabReviewCount">0</span>)</button>
+        <div id="pdp-tabs" class="pdp-tabs-container" style="margin-top: 50px;">
+            <div class="pdp-tabs-header" style="display: flex; justify-content: center; border-bottom: 2px solid var(--border-color); gap: 40px; margin-bottom: 30px;">
+                <button class="pdp-tab-btn active" id="tab-desc" onclick="switchPdpTab('desc')" style="background: none; border: none; padding: 15px 10px; font-size: 1.15rem; font-weight: 700; color: var(--primary-blue); cursor: pointer; border-bottom: 3px solid var(--primary-blue); margin-bottom: -2px; transition: var(--transition); letter-spacing: 0.5px;">Description</button>
+                <button class="pdp-tab-btn" id="tab-reviews" onclick="switchPdpTab('reviews')" style="background: none; border: none; padding: 15px 10px; font-size: 1.15rem; font-weight: 700; color: var(--text-muted); cursor: pointer; margin-bottom: -2px; transition: var(--transition); letter-spacing: 0.5px;">Reviews (<span id="tabReviewCount">0</span>)</button>
             </div>
             
-            <div class="pdp-tab-content active" id="content-desc">
+            <div class="pdp-tab-content active" id="content-desc" style="animation: fadeIn 0.4s ease;">
+                <!-- Large Bordered Download Datasheet Container -->
+                <div style="margin-bottom: 40px;">
+                    <a id="pdLongDatasheetBtn" href="#" target="_blank" style="display: block; text-align: center; border: 1.5px solid #1a1a1a; padding: 16px 20px; font-weight: 700; color: #1a1a1a; text-decoration: underline; text-transform: uppercase; letter-spacing: 1px; font-size: 0.95rem; border-radius: var(--radius-sm); transition: all 0.3s ease; font-family: sans-serif; background-color: white;">
+                        DOWNLOAD PRODUCT DATASHEET
+                    </a>
+                </div>
                 <div id="pdLongDesc" class="pd-long-desc" style="font-size: 1.05rem; line-height: 1.8; color: var(--text-dark);"></div>
             </div>
             
@@ -1939,6 +2013,22 @@ function doExit() {
 },
         };
 
+        function showPreloader() {
+            const preloader = document.getElementById('preloader');
+            if (preloader) {
+                preloader.style.opacity = '1';
+                preloader.style.visibility = 'visible';
+            }
+        }
+
+        function hidePreloader() {
+            const preloader = document.getElementById('preloader');
+            if (preloader) {
+                preloader.style.opacity = '0';
+                preloader.style.visibility = 'hidden';
+            }
+        }
+
         function navigate(targetHash, pushState = true) {
             closeMiniCart(); 
             closeSearch();
@@ -1948,12 +2038,17 @@ function doExit() {
             const url = new URL(window.location.href);
             url.hash = hash;
 
-            if (pushState) {
-                history.pushState({ page: hash }, '', url.href);
-            } else {
-                history.replaceState({ page: hash }, '', url.href);
-            }
-            renderPageFromHash(hash);
+            showPreloader();
+
+            setTimeout(() => {
+                if (pushState) {
+                    history.pushState({ page: hash }, '', url.href);
+                } else {
+                    history.replaceState({ page: hash }, '', url.href);
+                }
+                renderPageFromHash(hash);
+                setTimeout(hidePreloader, 350);
+            }, 300);
         }
         
         function toggleMobileMenu() {
@@ -2060,24 +2155,46 @@ function doExit() {
                 renderPageFromHash(currentHash);
                 updateCartUI();
 
+                // Hide preloader when products are loaded
+                setTimeout(hidePreloader, 300);
+
             } catch (error) {
                 console.error("Firebase se products laane mein error:", error);
                 // Show a non-intrusive toast instead of a blocking alert
                 showToast('⚠️ Could not load products. Check your connection.', 'warning');
+                setTimeout(hidePreloader, 300);
             }
         }
         
         // Jab page load ho to FORAN website dikhao
         window.addEventListener('DOMContentLoaded', () => {
+            showPreloader();
             // 1. Fauran Home page open karo (Bina Firebase ka wait kiye)
             const initialHash = window.location.hash.substring(1);
-            navigate(initialHash || 'home', false); 
+            
+            closeMiniCart(); 
+            closeSearch();
+            closeMobileMenu();
+            renderPageFromHash(initialHash || 'home'); 
+            
             updateCartUI();
             addGlobalEventListeners();
             startCountdownTimer();
 
             // 2. Background mein aaram se Firebase se data mangwao
             loadProductsFromFirebase();
+
+            // 3. Sticky bottom bar scroll handler
+            window.addEventListener('scroll', () => {
+                const stickyBar = document.getElementById('pdp-sticky-bar');
+                if (stickyBar) {
+                    if (currentPage === 'product' && window.scrollY > 450) {
+                        stickyBar.style.transform = 'translateY(0)';
+                    } else {
+                        stickyBar.style.transform = 'translateY(100%)';
+                    }
+                }
+            }, { passive: true });
 
             // 3. Header shrink-on-scroll
             const header = document.querySelector('header');
@@ -2971,7 +3088,21 @@ function doExit() {
         let currentDetailQuantity = 1;
         function changeDetailQty(amount) {
             currentDetailQuantity = Math.max(1, currentDetailQuantity + amount);
-            document.getElementById('detailQty').textContent = currentDetailQuantity;
+            const qtyEl = document.getElementById('detailQty');
+            if (qtyEl) qtyEl.textContent = currentDetailQuantity;
+            
+            const stickyQtyEl = document.getElementById('stickyDetailQty');
+            if (stickyQtyEl) stickyQtyEl.textContent = currentDetailQuantity;
+
+            // Recalculate Subtotal
+            if (detailPageProductId) {
+                const product = getProductById(detailPageProductId);
+                if (product) {
+                    const subtotal = product.price * currentDetailQuantity;
+                    const subEl = document.getElementById('pdSubtotal');
+                    if (subEl) subEl.textContent = formatPrice(subtotal);
+                }
+            }
         }
 
         function addDetailToCart() {
@@ -2983,21 +3114,129 @@ function doExit() {
                 }
                 addToCart(detailPageProductId, currentDetailQuantity);
                 currentDetailQuantity = 1; // Reset quantity after adding
-                document.getElementById('detailQty').textContent = 1;
+                const qtyEl = document.getElementById('detailQty');
+                if (qtyEl) qtyEl.textContent = 1;
+                const stickyQtyEl = document.getElementById('stickyDetailQty');
+                if (stickyQtyEl) stickyQtyEl.textContent = 1;
+                
+                // Reset Subtotal
+                const subEl = document.getElementById('pdSubtotal');
+                if (subEl) subEl.textContent = formatPrice(product.price);
             }
         }
 
-        function shareProduct() {
-            if (detailPageProductId) {
-                const product = getProductById(detailPageProductId);
-                const shareText = `Check out this product: ${product.name} - ${window.location.href}`;
-                navigator.clipboard.writeText(shareText).then(() => {
+        function shareProduct(type = 'copy') {
+            const url = window.location.href;
+            if (type === 'wa') {
+                window.open(`https://wa.me/?text=${encodeURIComponent(url)}`);
+            } else if (type === 'fb') {
+                window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`);
+            } else {
+                navigator.clipboard.writeText(url).then(() => {
                     showToast('Product link copied to clipboard!');
                 }).catch(err => {
-                    console.error('Failed to copy product link: ', err);
-                    showToast('Failed to copy link.');
+                    console.error('Failed to copy link: ', err);
                 });
             }
+        }
+
+        function orderOnWhatsAppDetail() {
+            if (detailPageProductId) {
+                const product = getProductById(detailPageProductId);
+                if (product) {
+                    const qty = currentDetailQuantity;
+                    const subtotal = product.price * qty;
+                    const message = `Hello Al Noor Solar Energy! I want to order this product:\n\n*Product:* ${product.name}\n*Quantity:* ${qty}\n*Price:* ${formatPrice(product.price)}\n*Subtotal:* ${formatPrice(subtotal)}\n\nPlease confirm my order. Thanks!`;
+                    const waUrl = `https://wa.me/923006771013?text=${encodeURIComponent(message)}`;
+                    window.open(waUrl, '_blank');
+                }
+            }
+        }
+
+        function getFormattedSpecs(product) {
+            if (product.longDescription && product.longDescription.includes('General Specifications')) {
+                return product.longDescription;
+            }
+            
+            // Otherwise, generate structured specifications based on category
+            if (product.category === 'Solar Inverters') {
+                const capacityMatch = product.name.match(/\b\d+(\.\d+)?\s*(KW|kva)\b/i) || ['5KW'];
+                const capacityVal = capacityMatch[0].toUpperCase();
+                const modelName = product.name.replace(/inverter/i, '').trim();
+                return `
+                    <div style="font-family: sans-serif; color: #333;">
+                        <h3 style="font-size: 1.25rem; font-weight: 700; color: #111; margin-bottom: 20px; border-bottom: 2px solid #eee; padding-bottom: 8px;">${product.name}:</h3>
+                        <p style="font-size: 1rem; margin-bottom: 20px;"><strong>Model:</strong> ${modelName}</p>
+                        
+                        <h4 style="font-size: 1.1rem; font-weight: 700; color: #111; margin: 25px 0 10px;">General Specifications</h4>
+                        <ul style="list-style-type: disc; padding-left: 20px; line-height: 1.8; font-size: 0.95rem; color: #444; display: flex; flex-direction: column; gap: 8px;">
+                            <li><strong>Rated Power:</strong> ${capacityVal}</li>
+                            <li><strong>Waveform:</strong> Pure Sine Wave</li>
+                            <li><strong>Efficiency (Peak):</strong> 93%</li>
+                            <li><strong>Transfer Time:</strong> 10ms (PC), 20ms (Home Appliances)</li>
+                        </ul>
+
+                        <h4 style="font-size: 1.1rem; font-weight: 700; color: #111; margin: 25px 0 10px;">AC Input</h4>
+                        <ul style="list-style-type: disc; padding-left: 20px; line-height: 1.8; font-size: 0.95rem; color: #444; display: flex; flex-direction: column; gap: 8px;">
+                            <li><strong>Rated Voltage:</strong> 230VAC</li>
+                            <li><strong>Voltage Range:</strong> 170~280VAC (PC), 90~280VAC (Home Appliances)</li>
+                            <li><strong>Frequency Range:</strong> 50Hz / 60Hz (Auto Sensing)</li>
+                        </ul>
+
+                        <h4 style="font-size: 1.1rem; font-weight: 700; color: #111; margin: 25px 0 10px;">AC Output</h4>
+                        <ul style="list-style-type: disc; padding-left: 20px; line-height: 1.8; font-size: 0.95rem; color: #444; display: flex; flex-direction: column; gap: 8px;">
+                            <li><strong>Output Voltage:</strong> 230VAC &plusmn; 5%</li>
+                        </ul>
+
+                        <h4 style="font-size: 1.1rem; font-weight: 700; color: #111; margin: 25px 0 10px;">Battery Specifications</h4>
+                        <ul style="list-style-type: disc; padding-left: 20px; line-height: 1.8; font-size: 0.95rem; color: #444; display: flex; flex-direction: column; gap: 8px;">
+                            <li><strong>Battery Voltage:</strong> 24VDC or 48VDC (Model Dependent)</li>
+                            <li><strong>Floating Charge Voltage:</strong> 27VDC / 54VDC</li>
+                            <li><strong>Overcharge Protection:</strong> 32VDC / 63VDC</li>
+                        </ul>
+
+                        <h4 style="font-size: 1.1rem; font-weight: 700; color: #111; margin: 25px 0 10px;">Solar Charger Specifications</h4>
+                        <ul style="list-style-type: disc; padding-left: 20px; line-height: 1.8; font-size: 0.95rem; color: #444; display: flex; flex-direction: column; gap: 8px;">
+                            <li><strong>Charger Type:</strong> MPPT</li>
+                            <li><strong>Maximum PV Array Power:</strong> 5000W</li>
+                            <li><strong>Maximum PV Open Circuit Voltage:</strong> 500VDC</li>
+                        </ul>
+                    </div>
+                `;
+            } else if (product.category === 'Solar Panels') {
+                const capacityMatch = product.name.match(/\b\d+\s*W\b/i) || ['550W'];
+                return `
+                    <div style="font-family: sans-serif; color: #333;">
+                        <h3 style="font-size: 1.25rem; font-weight: 700; color: #111; margin-bottom: 20px; border-bottom: 2px solid #eee; padding-bottom: 8px;">${product.name}:</h3>
+                        
+                        <h4 style="font-size: 1.1rem; font-weight: 700; color: #111; margin: 25px 0 10px;">Technical Details</h4>
+                        <ul style="list-style-type: disc; padding-left: 20px; line-height: 1.8; font-size: 0.95rem; color: #444; display: flex; flex-direction: column; gap: 8px;">
+                            <li><strong>Max Power (Pmax):</strong> ${capacityMatch[0]}</li>
+                            <li><strong>Technology:</strong> N-Type TopCon / Bifacial Double Glass</li>
+                            <li><strong>Module Efficiency:</strong> 22.5%</li>
+                            <li><strong>Cell Type:</strong> Monocrystalline</li>
+                            <li><strong>Warranty:</strong> 25 Years Performance Warranty</li>
+                        </ul>
+                    </div>
+                `;
+            } else if (product.category === 'Lithium Batteries') {
+                return `
+                    <div style="font-family: sans-serif; color: #333;">
+                        <h3 style="font-size: 1.25rem; font-weight: 700; color: #111; margin-bottom: 20px; border-bottom: 2px solid #eee; padding-bottom: 8px;">${product.name}:</h3>
+                        
+                        <h4 style="font-size: 1.1rem; font-weight: 700; color: #111; margin: 25px 0 10px;">Technical Specifications</h4>
+                        <ul style="list-style-type: disc; padding-left: 20px; line-height: 1.8; font-size: 0.95rem; color: #444; display: flex; flex-direction: column; gap: 8px;">
+                            <li><strong>Chemistry:</strong> LiFePO4 (Lithium Iron Phosphate)</li>
+                            <li><strong>Nominal Voltage:</strong> 48V / 51.2V</li>
+                            <li><strong>Life Cycles:</strong> 6000+ Cycles @ 80% DOD</li>
+                            <li><strong>BMS:</strong> Integrated Smart Battery Management System</li>
+                            <li><strong>Communication Ports:</strong> CAN / RS485</li>
+                        </ul>
+                    </div>
+                `;
+            }
+            
+            return `<p>${product.description}</p>`;
         }
 
         function renderProductDetail(params) {
@@ -3023,28 +3262,91 @@ function doExit() {
             document.getElementById('pdName').textContent = product.name;
             document.getElementById('pdPrice').textContent = formatPrice(product.price);
             
-            if (product.oldPrice) {
-                document.getElementById('pdOld').textContent = formatPrice(product.oldPrice);
-                document.getElementById('pdSaleTag').style.display = 'block';
-            } else {
-                document.getElementById('pdOld').textContent = '';
-                document.getElementById('pdSaleTag').style.display = 'none';
-            }
+            // Populate Sticky Bottom Bar
+            const stickyImg = document.getElementById('stickyPdImg');
+            if (stickyImg) stickyImg.src = product.image;
+            const stickyName = document.getElementById('stickyPdName');
+            if (stickyName) stickyName.textContent = product.name;
+            const stickyPrice = document.getElementById('stickyPdPrice');
+            if (stickyPrice) stickyPrice.textContent = formatPrice(product.price);
+            const stickyQty = document.getElementById('stickyDetailQty');
+            if (stickyQty) stickyQty.textContent = 1;
             
-            document.getElementById('pdDesc').textContent = product.description;
+            // Excerpt Specs text
+            const excerptEl = document.getElementById('pdSpecsExcerpt');
+            if (excerptEl) {
+                const modelStr = product.name.replace(/inverter|solar|panel|battery/gi, '').trim();
+                const specWord = product.category === 'Solar Panels' ? 'Max Power Module' : product.category === 'Lithium Batteries' ? 'Nominal Chemistry Cycle' : 'General specifications rated power';
+                excerptEl.textContent = `Download Product Datasheet ${product.vendor.toUpperCase()} ${modelStr}: Model: ${modelStr} ${specWord} output surge power peak wave transfer time...`;
+            }
+
+            // Specs Metadata block
+            const detailsVendor = document.getElementById('pdDetailsVendor');
+            if (detailsVendor) detailsVendor.textContent = product.vendor;
+            const detailsAvail = document.getElementById('pdDetailsAvailability');
+            if (detailsAvail) detailsAvail.textContent = product.availability;
+            const detailsType = document.getElementById('pdDetailsType');
+            if (detailsType) detailsType.textContent = product.category === 'Solar Inverters' ? 'Solar Inverter' : product.category === 'Solar Panels' ? 'Solar Panel' : product.category === 'Lithium Batteries' ? 'Lithium Battery' : 'Solar Accessory';
+
+            // Sold dynamic counter
+            const soldCount = (product.price % 8) + 4;
+            const soldHours = (product.price % 10) + 12;
+            const soldEl = document.getElementById('pdSoldText');
+            if (soldEl) soldEl.textContent = `${soldCount} sold in last ${soldHours} hours`;
+
+            // Dynamic stock progress
+            const stockLeft = (product.price % 7) + 3;
+            const hurryText = document.getElementById('pdHurryText');
+            if (hurryText) hurryText.textContent = `Please hurry! Only ${stockLeft} left in stock`;
+            const hurryProgress = document.getElementById('pdHurryProgress');
+            if (hurryProgress) hurryProgress.style.width = `${(stockLeft / 10) * 100}%`;
+
+            // Viewer count
+            const viewers = (product.price % 14) + 8;
+            const viewersEl = document.getElementById('pdViewersText');
+            if (viewersEl) viewersEl.textContent = `${viewers} customers are viewing this product`;
+
+            // Subtotal
+            const subEl = document.getElementById('pdSubtotal');
+            if (subEl) subEl.textContent = formatPrice(product.price);
+
+            if (product.oldPrice) {
+                const oldEl = document.getElementById('pdOld');
+                if (oldEl) oldEl.textContent = formatPrice(product.oldPrice);
+                const saleBadge = document.getElementById('pdSaleTag');
+                if (saleBadge) saleBadge.style.display = 'block';
+            } else {
+                const oldEl = document.getElementById('pdOld');
+                if (oldEl) oldEl.textContent = '';
+                const saleBadge = document.getElementById('pdSaleTag');
+                if (saleBadge) saleBadge.style.display = 'none';
+            }
 
             // Datasheet
             const datasheetBtn = document.getElementById('pdDatasheetBtn');
-            datasheetBtn.style.display = 'flex';
+            const longDatasheetBtn = document.getElementById('pdLongDatasheetBtn');
             if (product.datasheetUrl && product.datasheetUrl.trim() !== '') {
-                datasheetBtn.href = product.datasheetUrl;
-                datasheetBtn.onclick = null;
+                if (datasheetBtn) {
+                    datasheetBtn.href = product.datasheetUrl;
+                    datasheetBtn.onclick = null;
+                }
+                if (longDatasheetBtn) {
+                    longDatasheetBtn.href = product.datasheetUrl;
+                    longDatasheetBtn.onclick = null;
+                }
             } else {
-                datasheetBtn.href = "#";
-                datasheetBtn.onclick = function(e) {
+                const fallbackDs = (e) => {
                     e.preventDefault();
-                    alert("Datasheet PDF is currently unavailable for this product.");
+                    alert("Technical datasheet is currently unavailable for this product.");
                 };
+                if (datasheetBtn) {
+                    datasheetBtn.href = "#";
+                    datasheetBtn.onclick = fallbackDs;
+                }
+                if (longDatasheetBtn) {
+                    longDatasheetBtn.href = "#";
+                    longDatasheetBtn.onclick = fallbackDs;
+                }
             }
 
             // Availability
@@ -3053,36 +3355,41 @@ function doExit() {
             const pdBuyBtn = document.getElementById('pdBuyBtn');
             
             if (product.availability === 'Out of stock') {
-                availBadge.innerHTML = '<i class="fas fa-times-circle"></i> Out of Stock';
-                availBadge.style.color = '#e53935';
+                if (availBadge) {
+                    availBadge.innerHTML = '<i class="fas fa-times-circle"></i> Out of Stock';
+                    availBadge.style.color = '#e53935';
+                }
                 
-                pdAddBtn.innerHTML = '<i class="fas fa-bell"></i> Notify Me';
-                pdAddBtn.style.opacity = '0.5';
-                pdAddBtn.onclick = () => alert("You will be notified when this item is back in stock.");
+                if (pdAddBtn) {
+                    pdAddBtn.innerHTML = '<i class="fas fa-bell"></i> Notify Me';
+                    pdAddBtn.style.opacity = '0.5';
+                    pdAddBtn.onclick = () => alert("You will be notified when this item is back in stock.");
+                }
                 
-                pdBuyBtn.style.display = 'none';
+                if (pdBuyBtn) pdBuyBtn.style.display = 'none';
             } else {
-                availBadge.innerHTML = '<i class="fas fa-check-circle"></i> In Stock';
-                availBadge.style.color = '#2e7d32';
+                if (availBadge) {
+                    availBadge.innerHTML = '<i class="fas fa-check-circle"></i> In Stock';
+                    availBadge.style.color = '#2e7d32';
+                }
                 
-                pdAddBtn.innerHTML = '<i class="fas fa-cart-plus"></i> Add to Cart';
-                pdAddBtn.style.opacity = '1';
-                pdAddBtn.onclick = addDetailToCart;
-                
-                pdBuyBtn.style.display = 'flex';
+                if (pdAddBtn) {
+                    pdAddBtn.innerHTML = 'ADD TO CART';
+                    pdAddBtn.style.opacity = '1';
+                    pdAddBtn.onclick = addDetailToCart;
+                }
             }
 
             // Long Description
             const longDescDiv = document.getElementById('pdLongDesc');
-            if (product.longDescription && product.longDescription.trim() !== '') {
-                longDescDiv.innerHTML = product.longDescription;
-            } else {
-                longDescDiv.innerHTML = "<p>No technical specifications available for this product.</p>";
+            if (longDescDiv) {
+                longDescDiv.innerHTML = getFormattedSpecs(product);
             }
 
             // Reset Qty
             currentDetailQuantity = 1;
-            document.getElementById('detailQty').textContent = currentDetailQuantity;
+            const qtyEl = document.getElementById('detailQty');
+            if (qtyEl) qtyEl.textContent = currentDetailQuantity;
 
             // Load Reviews & Ratings
             loadReviews();
@@ -4176,6 +4483,53 @@ function renderAboutPage() {
     </div>
     <a href="#account" class="po-btn" onclick="navigate('account'); document.getElementById('pendingOrderBanner').classList.remove('show');">View Details</a>
 </div>
+
+<!-- Sticky Bottom Bar -->
+<div id="pdp-sticky-bar" style="
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    box-shadow: 0 -4px 15px rgba(0,0,0,0.15);
+    z-index: 998;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transform: translateY(100%);
+    transition: transform 0.3s ease-in-out;
+    font-family: sans-serif;
+    box-sizing: border-box;
+">
+    <div style="display: flex; align-items: center; gap: 15px; flex: 1; min-width: 0;">
+        <img id="stickyPdImg" src="" alt="Product Image" style="width: 46px; height: 46px; object-fit: contain; border-radius: 6px; background-color: #f8f9fa; border: 1px solid #eee; flex-shrink: 0;">
+        <div style="min-width: 0;">
+            <div id="stickyPdName" style="font-weight: 700; color: #111; font-size: 0.92rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 250px;">Product Name</div>
+            <div id="stickyPdPrice" style="font-weight: 800; color: var(--primary-blue); font-size: 1.05rem; margin-top: 2px;">Rs. 0</div>
+        </div>
+    </div>
+    
+    <div style="display: flex; align-items: center; gap: 15px;">
+        <div style="display: flex; background: white; border: 1px solid #ddd; border-radius: var(--radius-sm); overflow: hidden;">
+            <button onclick="changeDetailQty(-1)" style="width: 38px; height: 38px; border: none; background: none; font-size: 1.1rem; cursor: pointer; color: #333; display: flex; align-items: center; justify-content: center;">−</button>
+            <span id="stickyDetailQty" style="width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; font-weight: 600; border-left: 1px solid #ddd; border-right: 1px solid #ddd; font-size: 0.95rem; color: #111; min-width: 20px;">1</span>
+            <button onclick="changeDetailQty(1)" style="width: 38px; height: 38px; border: none; background: none; font-size: 1.1rem; cursor: pointer; color: #333; display: flex; align-items: center; justify-content: center;">+</button>
+        </div>
+        <button onclick="addDetailToCart()" style="background: #1565C0; color: white; border: none; padding: 0 24px; height: 38px; font-weight: 700; border-radius: var(--radius-sm); cursor: pointer; transition: background 0.2s; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap; box-shadow: 0 4px 10px rgba(21,101,192,0.2);">
+            ADD TO CART
+        </button>
+    </div>
+</div>
+
+<style>
+@media (max-width: 768px) {
+    #pdp-sticky-bar {
+        bottom: 60px !important; /* Sit directly above bottom navigation on mobile */
+        padding: 10px 15px !important;
+    }
+}
+</style>
 
 </body>
 </html>
